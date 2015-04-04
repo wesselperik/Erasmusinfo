@@ -241,7 +241,7 @@ public class MainActivity extends ActionBarActivity {
         appRater.setDaysBeforePrompt(2);
         appRater.setLaunchesBeforePrompt(5);
 
-        appRater.setPhrases("Waardeer deze app", "Vindt je deze app nuttig/handig/cool/geweldig? Geef dan je mening op Google Play. Bedankt voor je support!", "Waardeer", "Later", "Nee bedankt");
+        appRater.setPhrases("Beoordeel deze app", "Vindt je deze app nuttig/handig/cool/geweldig? Geef dan je mening op Google Play. Bedankt voor je support!", "Beoordeel", "Later", "Nee bedankt");
         appRater.setTargetUri("https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo");
         appRater.setPreferenceKeys("app_rater", "flag_dont_show", "launch_count", "first_launch_time");
 
