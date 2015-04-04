@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release version="1.3" versioncode="4">
+        <change>Bugfix: Op Android 5.0 crashed de app bij opstarten</change>
+        <change>Menu icons veranderd</change>
+        <change>Menu-optie 'Over deze app' toegevoegd</change>
+        <change>Changelog toegevoegd</change>
+        <change>Statistieken toegevoegd</change>
+        <change>Error page toegevoegd</change>
+    </release>
+    <release version="1.2" versioncode="3">
+        <change>Nieuwe layout</change>
+        <change>Slider menu toegevoegd</change>
+        <change>Bugfixes</change>
+    </release>
+    <release version="1.1" versioncode="2">
+        <change>Bugfix: Pagina's laden niet</change>
+        <change>Meer opties toegevoegd</change>
+    </release>
+    <release version="1.0" versioncode="1">
+        <change>Eerste release</change>
+    </release>
+</changelog>

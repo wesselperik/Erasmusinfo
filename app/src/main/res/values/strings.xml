@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Erasmusinfo</string>
+    <string name="title_section1">Erasmusinfo</string>
+    <string name="title_section2">Erasmusinfo</string>
+    <string name="title_section3">Erasmusinfo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_changelog">Changelog</string>
+    <string name="action_about">Over deze app</string>
+    <string name="close">Sluiten</string>
+    <string name="version">v1.4</string>
+    <string name="imgdesc">imgdesc</string>
+
+
+    <!-- Titels van pagina's -->
+
+    <string-array name="titles">
+        <item>Home</item>
+        <item>HAVO/VWO</item>
+        <item>VMBO</item>
+        <item>Pro</item>
+        <item>Statistieken</item>
+        <item>Contact</item>
+    </string-array>
+
+
+    <!-- Pagina URL's -->
+
+    <string-array name="pageurl">
+        <item>http://erasmusinfo.nl/m</item>
+        <item>http://erasmusinfo.nl/m/havo-vwo</item>
+        <item>http://erasmusinfo.nl/m/vmbo</item>
+        <item>http://erasmusinfo.nl/m/pro</item>
+        <item>http://erasmusinfo.nl/m/statistieken</item>
+        <item>http://erasmusinfo.nl/m/contact</item>
+    </string-array>
+
+
+
+    <!-- Icons -->
+
+    <array name="icons">
+        <item>@drawable/home</item>
+        <item>@drawable/school_havovwo</item>
+        <item>@drawable/school_vmbo</item>
+        <item>@drawable/school_pro</item>
+        <item>@drawable/statistieken</item>
+        <item>@drawable/contact</item>
+    </array>
+
+</resources>

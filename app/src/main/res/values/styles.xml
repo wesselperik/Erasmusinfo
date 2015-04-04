@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle"   tools:ignore="NewApi">@style/ActionBarStyle</item>
+        <item name="actionBarStyle">@style/ActionBarStyle</item>
+
+    </style>
+
+    <style name="ActionBarStyle">
+        <item name="android:background"  tools:ignore="NewApi">#E3E3E3</item>
+    </style>
+
+</resources>
