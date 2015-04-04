@@ -8,16 +8,23 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -30,8 +37,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
+    private static final String TAG = "Erasmusinfo";
     String[] menutitles;
     TypedArray menuIcons;
     String[] pageUrl;
@@ -84,10 +93,7 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle= new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        WVersionManager versionManager = new WVersionManager(this);
-        versionManager.checkVersion();
+        giveVoteOption();
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
@@ -107,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void updateDisplay(int position) {
         String url = rowItems.get(position).getPageUrl();
-        Fragment fragment = new MyWebViewFragment();
+        Fragment fragment = new WebViewFragment();
 
         Bundle bundle = new Bundle();
         bundle.putString("url", url);
@@ -137,16 +143,18 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.action_about:
-                new AlertDialog.Builder(this)
+                final AlertDialog d = new AlertDialog.Builder(this)
                         .setTitle("Over deze app")
-                        .setMessage("Erasmusinfo v1.4 \n\n\u00A9 2015 Erasmusinfo")
+                        .setMessage(Html.fromHtml("Erasmusinfo v1.4<br /><br /><a href=\"http://erasmusinfo.nl\">Website</a><br /><br /><a href=\"http://github.com/wesselperik/Erasmusinfo\">Sourcecode op GitHub</a><br /><br />© 2015 Wessel Perik"))
                         .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
                         })
-                        .setIcon(R.drawable.ic_launcher)
-                        .show();
+                        .setIcon(R.drawable.ic_icon)
+                        .create();
+                        d.show();
+                        ((TextView)d.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
                 return true;
 
             case R.id.action_changelog:
@@ -188,17 +196,56 @@ public class MainActivity extends ActionBarActivity {
         super.onBackPressed();
     }
 
-    public void onClick(View v) {
-        new AlertDialog.Builder(this)
-                .setTitle("Hey")
-                .setMessage("Erasmusinfo v1.4 \n\n\u00A9 2015 Erasmusinfo")
+    public void donateAction(View v) {
+        final AlertDialog d = new AlertDialog.Builder(this)
+                .setTitle("Doneren")
+                .setMessage(Html.fromHtml("Wil je de ontwikkeling van deze app steunen? Je kunt een (klein) bedrag doneren via PayPal, om dit te doen klik simpelweg op de knop 'Doneren' hieronder om doorverwezen te worden.<br /><br />Bij de donatie kun je je naam vermelden. Dit is niet verplicht, maar als je dit wel doet zal je naam vermeld worden in de app in het 'Over deze app'-scherm, als dank voor je bijdrage."))
+                .setPositiveButton(R.string.donate, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4V8MQJJN62BWA");
+                        Intent goToPaypal = new Intent(Intent.ACTION_VIEW, uri);
+                        goToPaypal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        try {
+                            startActivity(goToPaypal);
+                        } catch (ActivityNotFoundException e) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4V8MQJJN62BWA")));
+                        }
+                    }
+                })
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing
                     }
                 })
-                .setIcon(R.drawable.ic_launcher)
-                .show();
+                .setIcon(R.drawable.ic_icon)
+                .create();
+                d.show();
+                ((TextView)d.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public void rateAppAction(View v) {
+        Context context = this;
+        Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+        }
+    }
+
+    private void giveVoteOption() {
+        Log.i(TAG, "giveVoteOption");
+        AppRater appRater = new AppRater(this);
+        appRater.setDaysBeforePrompt(2);
+        appRater.setLaunchesBeforePrompt(5);
+
+        appRater.setPhrases("Waardeer deze app", "Vindt je deze app nuttig/handig/cool/geweldig? Geef dan je mening op Google Play. Bedankt voor je support!", "Waardeer", "Later", "Nee bedankt");
+        appRater.setTargetUri("https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo");
+        appRater.setPreferenceKeys("app_rater", "flag_dont_show", "launch_count", "first_launch_time");
+
+        appRater.show();
     }
 
 }

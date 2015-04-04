@@ -10,6 +10,8 @@
     <string name="action_changelog">Changelog</string>
     <string name="action_about">Over deze app</string>
     <string name="close">Sluiten</string>
+    <string name="donate">Doneren</string>
+    <string name="rate">Waarderen</string>
     <string name="version">v1.4</string>
     <string name="imgdesc">imgdesc</string>
 
