@@ -2,33 +2,24 @@ package com.wesselperik.erasmusinfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,7 +37,6 @@ public class MainActivity extends ActionBarActivity {
     String[] pageUrl;
     RelativeLayout mDrawerPane;
 
-    // nav drawer title
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private DrawerLayout mDrawerLayout;
@@ -66,10 +56,8 @@ public class MainActivity extends ActionBarActivity {
         menuIcons = getResources().obtainTypedArray(R.array.icons);
         pageUrl = getResources().getStringArray(R.array.pageurl);
 
-        // DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // Populate the Navigtion Drawer with options
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawer_pane);
         mDrawerList = (ListView) findViewById(R.id.slider_list);
         rowItems = new ArrayList<RowItem>();
@@ -86,7 +74,6 @@ public class MainActivity extends ActionBarActivity {
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new SlideitemListener());
 
-       /* enabling action bar app icon and behaving it as toggle button */
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -96,7 +83,6 @@ public class MainActivity extends ActionBarActivity {
         giveVoteOption();
 
         if (savedInstanceState == null) {
-            // on first time display view for first nav item
             updateDisplay(0);
         }
     }
@@ -135,12 +121,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // toggle nav drawer on selecting action bar app icon/title
+        // Navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
-        // Handle action bar actions click
+        // Actionbar items
         switch (item.getItemId()) {
             case R.id.action_about:
                 final AlertDialog d = new AlertDialog.Builder(this)
@@ -148,7 +134,6 @@ public class MainActivity extends ActionBarActivity {
                         .setMessage(Html.fromHtml("Erasmusinfo v1.4<br /><br /><a href=\"http://erasmusinfo.nl\">Website</a><br /><br /><a href=\"http://github.com/wesselperik/Erasmusinfo\">Sourcecode op GitHub</a><br /><br />© 2015 Wessel Perik"))
                         .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
                             }
                         })
                         .setIcon(R.drawable.ic_icon)
@@ -169,9 +154,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // if nav drawer is opened, hide the action items
-       /* boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerPane);
-        menu.findItem(R.id.action_about).setVisible(!drawerOpen); */
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -196,6 +178,7 @@ public class MainActivity extends ActionBarActivity {
         super.onBackPressed();
     }
 
+    // Doneren action
     public void donateAction(View v) {
         final AlertDialog d = new AlertDialog.Builder(this)
                 .setTitle("Doneren")
@@ -223,6 +206,7 @@ public class MainActivity extends ActionBarActivity {
                 ((TextView)d.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    // Waardeer app-action
     public void rateAppAction(View v) {
         Context context = this;
         Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
@@ -235,6 +219,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    // AppRater (automatich waardeer-app scherm)
     private void giveVoteOption() {
         Log.i(TAG, "giveVoteOption");
         AppRater appRater = new AppRater(this);

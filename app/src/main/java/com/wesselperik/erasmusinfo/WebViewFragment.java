@@ -18,7 +18,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 public class WebViewFragment extends Fragment {
 
@@ -67,7 +66,6 @@ public class WebViewFragment extends Fragment {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
-            // do nothing
         } else {
             mWebView.getSettings().setCacheMode(1);
         }
