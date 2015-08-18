@@ -1,15 +1,27 @@
-<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:actionBarStyle"   tools:ignore="NewApi">@style/ActionBarStyle</item>
-        <item name="actionBarStyle">@style/ActionBarStyle</item>
+    <!-- Erasmusinfo app themes -->
 
+    <style name="BlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#003138</item>
+        <item name="colorPrimaryDark">#00262B</item>
+        <item name="colorAccent">#00AEC1</item>
+    </style>
+    <style name="GreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#007F02</item>
+        <item name="colorPrimaryDark">#007000</item>
+        <item name="colorAccent">#00DB00</item>
+    </style>
+    <style name="RedTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#EB0028</item>
+        <item name="colorPrimaryDark">#BC0028</item>
+        <item name="colorAccent">#FF6A00</item>
     </style>
 
-    <style name="ActionBarStyle">
-        <item name="android:background"  tools:ignore="NewApi">#E3E3E3</item>
+    <style name="MainLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
 </resources>

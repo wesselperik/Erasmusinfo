@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Algemeen"
+        android:key="mainCategory">
+        <ListPreference
+            android:title="School"
+            android:summary="Kies jouw school zodat je makkelijker kunt navigeren naar jouw roosterwijzigingen"
+            android:key="settings_schoolname"
+            android:icon="@mipmap/ic_settings_school"
+            android:defaultValue="havovwo"
+            android:entries="@array/schoolArray"
+            android:entryValues="@array/schoolValues" />
+        <CheckBoxPreference
+            android:title="Laad school bij opstarten"
+            android:icon="@mipmap/ic_settings_startup"
+            android:defaultValue="false"
+            android:summary="Ga direct naar de roosterwijzigingen van jouw school bij het opstarten van de app"
+            android:key="settings_startup" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Interface"
+        android:key="interfaceCategory">
+        <ListPreference
+            android:title="Kleuren"
+            android:summary="Kies een kleurenpalet om de app aan te passen naar jouw persoonlijke smaak"
+            android:key="settings_theme"
+            android:icon="@mipmap/ic_settings_color"
+            android:defaultValue="blue"
+            android:entries="@array/colorArray"
+            android:entryValues="@array/colorValues" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Over deze app"
+        android:key="aboutCategory">
+        <Preference
+            android:title="Doneren"
+            android:summary="Wil je de ontwikkeling van deze app steunen? Je kunt een (klein) bedrag doneren via PayPal. Klik hier om verder te gaan."
+            android:key="info_donate"/>
+        <Preference
+            android:title="Beoordelen"
+            android:summary="Gebruik je deze app graag? Een beoordeling in de Play Store zou leuk zijn! Klik hier om naar de Play Store te gaan."
+            android:key="info_rate"/>
+        <Preference
+            android:title="Bijdragen aan ontwikkeling"
+            android:summary="Ben je een developer en wil je bijdragen aan de ontwikkeling van deze app? Klik hier om naar de GitHub pagina te gaan."
+            android:key="info_contribute"/>
+        <Preference
+            android:title="Changelog"
+            android:summary="Bekijk de changelog om te zien welke veranderingen er in elke update zijn doorgevoerd."
+            android:key="info_changelog"/>
+        <Preference
+            android:title="App-versie"
+            android:summary="v1.5"
+            android:key="info_version"
+            android:selectable="false"/>
+        <Preference
+            android:title="Copyright"
+            android:summary="© 2015 Wessel Perik"
+            android:key="info_copyright"
+            android:selectable="false"/>
+    </PreferenceCategory>
+</PreferenceScreen>
