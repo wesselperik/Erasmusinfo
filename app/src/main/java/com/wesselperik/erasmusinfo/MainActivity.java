@@ -1,12 +1,5 @@
 package com.wesselperik.erasmusinfo;
 
-import com.wesselperik.erasmusinfo.R;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,13 +8,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,7 +25,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,9 +36,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -161,6 +148,19 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 default:
             }
         }
+
+        if(!isNetworkAvailable(this)) {
+            Toast.makeText(this,"Geen internetverbinding", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager conMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(conMan.getActiveNetworkInfo() != null && conMan.getActiveNetworkInfo().isConnected())
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -354,6 +354,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 view = inflater.inflate(R.layout.fragment_havovwo, container, false);
                 listView = (ListView) view.findViewById(R.id.listView);
                 new GetMededelingen().execute();
+                view.getBackground().setAlpha(255);
 
                 ((MainActivity) getActivity()).setActionBarTitle("HAVO/VWO");
 
@@ -379,6 +380,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 parent.removeView(view);
             }
             return view;
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            if (mSwipeRefreshLayout.isRefreshing() && this.getView() != null) {
+                ((ViewGroup) this.getView()).removeAllViews();
+                this.getView().getBackground().setAlpha(0);
+                Log.d("DEBUG", "HavovwoFragment.onPause() has been called.");
+            }
         }
 
         private class GetMededelingen extends AsyncTask<Void, Void, Void> {
@@ -437,7 +448,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 UIHandler.post(new Runnable() {
                     public void run() {
 
-                        ListAdapter adapter = new SimpleAdapter(getActivity(), mededelingList, R.layout.list_item, new String[]{TAG_TITLE, TAG_TEXT}, new int[]{R.id.title, R.id.text});
+                        ListAdapter adapter = null;
+
+                        if(getActivity() != null){
+                            adapter = new SimpleAdapter(getActivity(), mededelingList, R.layout.list_item, new String[]{TAG_TITLE, TAG_TEXT}, new int[]{R.id.title, R.id.text});
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(new HavovwoFragment()).commit();
+                        }
+
                         // Dismiss progress-spinner
                         if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
@@ -477,6 +494,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 view = inflater.inflate(R.layout.fragment_vmbo, container, false);
                 listView = (ListView) view.findViewById(R.id.listView);
                 new GetMededelingen().execute();
+                view.getBackground().setAlpha(255);
 
                 ((MainActivity) getActivity()).setActionBarTitle("VMBO");
 
@@ -502,6 +520,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 parent.removeView(view);
             }
             return view;
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            if (mSwipeRefreshLayout.isRefreshing() && this.getView() != null) {
+                ((ViewGroup) this.getView()).removeAllViews();
+                this.getView().getBackground().setAlpha(0);
+                Log.d("DEBUG", "VmboFragment.onPause() has been called.");
+            }
         }
 
         private class GetMededelingen extends AsyncTask<Void, Void, Void> {
@@ -560,7 +588,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 UIHandler.post(new Runnable() {
                     public void run() {
 
-                        ListAdapter adapter = new SimpleAdapter(getActivity(), mededelingList, R.layout.list_item, new String[]{TAG_TITLE, TAG_TEXT}, new int[]{R.id.title, R.id.text});
+                        ListAdapter adapter = null;
+
+                        if(getActivity() != null){
+                            adapter = new SimpleAdapter(getActivity(), mededelingList, R.layout.list_item, new String[]{TAG_TITLE, TAG_TEXT}, new int[]{R.id.title, R.id.text});
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(new VmboFragment()).commit();
+                        }
+
                         // Dismiss progress-spinner
                         if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
@@ -600,6 +634,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 view = inflater.inflate(R.layout.fragment_pro, container, false);
                 listView = (ListView) view.findViewById(R.id.listView);
                 new GetMededelingen().execute();
+                view.getBackground().setAlpha(255);
 
                 ((MainActivity) getActivity()).setActionBarTitle("PrO");
 
@@ -625,6 +660,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 parent.removeView(view);
             }
             return view;
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            if (mSwipeRefreshLayout.isRefreshing() && this.getView() != null) {
+                ((ViewGroup) this.getView()).removeAllViews();
+                this.getView().getBackground().setAlpha(0);
+                Log.d("DEBUG", "ProFragment.onPause() has been called.");
+            }
         }
 
         private class GetMededelingen extends AsyncTask<Void, Void, Void> {
@@ -683,7 +728,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 UIHandler.post(new Runnable() {
                     public void run() {
 
-                        ListAdapter adapter = new SimpleAdapter(getActivity(), mededelingList, R.layout.list_item, new String[]{TAG_TITLE, TAG_TEXT}, new int[]{R.id.title, R.id.text});
+                        ListAdapter adapter = null;
+
+                        if(getActivity() != null){
+                            adapter = new SimpleAdapter(getActivity(), mededelingList, R.layout.list_item, new String[]{TAG_TITLE, TAG_TEXT}, new int[]{R.id.title, R.id.text});
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(new ProFragment()).commit();
+                        }
+
                         // Dismiss progress-spinner
                         if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
@@ -718,7 +769,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
             ((MainActivity) getActivity()).setActionBarTitle("Instellingen");
 
-            // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preferences);
 
             Preference donatePreference = findPreference("info_donate");
@@ -779,30 +829,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            //((MainActivity) activity).onSectionAttached(1);
         }
     }
 
-    /*
-    static void applyColor(boolean close, String themecolor, Activity activity, Context context) {
-        SharedPreferences colorprefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        if (themecolor == null)
-            themecolor = colorprefs.getString("settings_theme", "blue");
-
-        if (themecolor == "blue") {
-            activity.setTheme(R.style.BlueTheme);
-        }
-        else if (themecolor == "red") {
-            activity.setTheme(R.style.RedTheme);
-        }
-        else if (themecolor == "green") {
-            activity.setTheme(R.style.GreenTheme);
-        }
-
-        if (close)
-            activity.startActivity(new Intent(activity, MainActivity.class));
-    } */
 
     static void restartMain(Activity activity){
         activity.startActivity(new Intent(activity, MainActivity.class));
