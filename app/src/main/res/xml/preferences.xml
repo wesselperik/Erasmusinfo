@@ -23,29 +23,41 @@
         android:key="interfaceCategory">
         <ListPreference
             android:title="Kleuren"
-            android:summary="Kies een kleurenpalet om de app aan te passen naar jouw persoonlijke smaak"
+            android:summary="Kies een kleurenpalet om de app aan te passen naar jouw persoonlijke smaak (Deze functie is tijdelijk uitgeschakeld.)"
             android:key="settings_theme"
             android:icon="@mipmap/ic_settings_color"
-            android:defaultValue="blue"
+            android:defaultValue="indigo"
+            android:enabled="false"
             android:entries="@array/colorArray"
             android:entryValues="@array/colorValues" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Magister integratie"
+        android:key="magisterCategory">
+        <EditTextPreference
+            android:title="Gebruikersnaam"
+            android:summary="Voer hier je Magister gebruikersnaam in"
+            android:key="account_username"/>
+        <EditTextPreference
+            android:title="Wachtwoord"
+            android:summary="Voer hier je Magister wachtwoord in"
+            android:inputType="textPassword"
+            android:key="account_password"/>
+        <CheckBoxPreference
+            android:title="Simpele weergave"
+            android:defaultValue="false"
+            android:summary="Geef de volledige naam van de les weer in plaats van de afkorting"
+            android:key="magister_simplify" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Over deze app"
         android:key="aboutCategory">
         <Preference
-            android:title="Doneren"
-            android:summary="Wil je de ontwikkeling van deze app steunen? Je kunt een (klein) bedrag doneren via PayPal. Klik hier om verder te gaan."
-            android:key="info_donate"/>
-        <Preference
             android:title="Beoordelen"
             android:summary="Gebruik je deze app graag? Een beoordeling in de Play Store zou leuk zijn! Klik hier om naar de Play Store te gaan."
             android:key="info_rate"/>
-        <Preference
-            android:title="Bijdragen aan ontwikkeling"
-            android:summary="Ben je een developer en wil je bijdragen aan de ontwikkeling van deze app? Klik hier om naar de GitHub pagina te gaan."
-            android:key="info_contribute"/>
         <Preference
             android:title="Changelog"
             android:summary="Bekijk de changelog om te zien welke veranderingen er in elke update zijn doorgevoerd."

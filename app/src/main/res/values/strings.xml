@@ -6,8 +6,11 @@
     <string name="nav_havovwo">HAVO/VWO</string>
     <string name="nav_vmbo">VMBO</string>
     <string name="nav_pro">PrO</string>
+    <string name="nav_rooster">Rooster</string>
     <string name="nav_prefs">Instellingen</string>
     <string name="nav_share">Delen</string>
+
+    <string name="pref_previously_started">pref_started</string>
 
     <string name="close">Sluiten</string>
 
@@ -21,4 +24,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_first_startup">Welkom</string>
+    <string name="title_activity_settings">Instellingen</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

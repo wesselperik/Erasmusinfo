@@ -11,12 +11,16 @@
         <item>pro</item>
     </string-array>
     <string-array name="colorArray">
+        <item>Indigo (standaard)</item>
         <item>Blauw</item>
+        <item>Donkerblauw</item>
         <item>Groen</item>
         <item>Rood</item>
     </string-array>
     <string-array name="colorValues">
+        <item>indigo</item>
         <item>blue</item>
+        <item>darkblue</item>
         <item>green</item>
         <item>red</item>
     </string-array>

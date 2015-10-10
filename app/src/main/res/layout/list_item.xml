@@ -3,29 +3,37 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:background="@layout/card">
+    android:padding="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
-
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="fill_parent"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:paddingTop="6dip"
-        android:paddingLeft="10dp"
-        android:textColor="#000000"
-        android:textSize="22sp" />
+        card_view:cardCornerRadius="2dp">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="6dip"
-        android:paddingLeft="10dp"
-        android:textColor="#ff979797" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dip"
+            android:paddingTop="6dip"
+            android:paddingLeft="10dp"
+            android:textColor="#000000"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_below="@id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="36dip"
+            android:paddingBottom="6dip"
+            android:paddingLeft="10dp"
+            android:textColor="#ff979797" />
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

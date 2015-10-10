@@ -4,13 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/second_grey">
+    android:background="@color/grey">
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:dividerHeight="-10dp"/>
+        android:dividerHeight="-1dp"/>
 
 
 

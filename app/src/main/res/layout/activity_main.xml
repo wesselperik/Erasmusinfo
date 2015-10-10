@@ -8,29 +8,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout android:id="@+id/container" android:layout_width="match_parent"
+    <FrameLayout
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_school"
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom|end"
-        android:onClick="goToSchool"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:pressedTranslationZ="18dp"/>
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_fab_school"
+            android:onClick="goToSchool"
+            fab:fab_colorNormal="@color/IndigoThemeAccent"
+            fab:fab_colorPressed="#049fd9"
+            fab:fab_colorRipple="#6ac2edff"/>
 
     </FrameLayout>
 
+    <android.support.design.widget.NavigationView
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/drawer_view"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer" />
+<!--
     <fragment android:id="@+id/navigation_drawer"
         android:layout_width="240dp" android:layout_height="match_parent"
         android:layout_gravity="start"
         android:name="com.wesselperik.erasmusinfo.NavigationDrawerFragment"
-        tools:layout="@layout/fragment_navigation_drawer" />
+        tools:layout="@layout/fragment_navigation_drawer" /> -->
 
     </android.support.v4.widget.DrawerLayout>
 
