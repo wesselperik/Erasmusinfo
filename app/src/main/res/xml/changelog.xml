@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="1.5" versioncode="7">
+        <change>App helemaal herschreven met een verbeterde layout</change>
+        <change>Instellingen toegevoegd</change>
+        <change>App bestaat niet meer uit webpagina's, nu een 'echte' app</change>
+    </release>
+    <release version="1.4.1" versioncode="6">
+        <change>Bugfixes en optimalisaties</change>
+    </release>
     <release version="1.4" versioncode="5">
         <change>Eerste Play Store release!</change>
         <change>Nieuwe app-icon</change>

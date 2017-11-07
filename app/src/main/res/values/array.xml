@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="schoolArray">
+        <item>HAVO/VWO</item>
+        <item>VMBO</item>
+        <item>PrO</item>
+    </string-array>
+    <string-array name="schoolValues">
+        <item>havovwo</item>
+        <item>vmbo</item>
+        <item>pro</item>
+    </string-array>
+    <string-array name="colorArray">
+        <item>Indigo (standaard)</item>
+        <item>Blauw</item>
+        <item>Donkerblauw</item>
+        <item>Groen</item>
+        <item>Rood</item>
+    </string-array>
+    <string-array name="colorValues">
+        <item>indigo</item>
+        <item>blue</item>
+        <item>darkblue</item>
+        <item>green</item>
+        <item>red</item>
+    </string-array>
+</resources>

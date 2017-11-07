@@ -1,55 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Erasmusinfo</string>
-    <string name="title_section1">Erasmusinfo</string>
-    <string name="title_section2">Erasmusinfo</string>
-    <string name="title_section3">Erasmusinfo</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_changelog">Changelog</string>
-    <string name="action_about">Over deze app</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_havovwo">HAVO/VWO</string>
+    <string name="nav_vmbo">VMBO</string>
+    <string name="nav_pro">PrO</string>
+    <string name="nav_rooster">Rooster</string>
+    <string name="nav_prefs">Instellingen</string>
+    <string name="nav_share">Delen</string>
+
+    <string name="pref_previously_started">pref_started</string>
+
     <string name="close">Sluiten</string>
-    <string name="donate">Doneren</string>
-    <string name="rate">Beoordelen</string>
-    <string name="version">v1.4</string>
-    <string name="imgdesc">imgdesc</string>
-
-
-    <!-- Titels van pagina's -->
 
     <string-array name="titles">
         <item>Home</item>
         <item>HAVO/VWO</item>
         <item>VMBO</item>
-        <item>Pro</item>
-        <item>Statistieken</item>
-        <item>Contact</item>
+        <item>PrO</item>
+        <item>Instellingen</item>
     </string-array>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_first_startup">Welkom</string>
+    <string name="title_activity_settings">Instellingen</string>
 
-    <!-- Pagina URL's -->
-
-    <string-array name="pageurl">
-        <item>http://erasmusinfo.nl/m</item>
-        <item>http://erasmusinfo.nl/m/havo-vwo</item>
-        <item>http://erasmusinfo.nl/m/vmbo</item>
-        <item>http://erasmusinfo.nl/m/pro</item>
-        <item>http://erasmusinfo.nl/m/statistieken</item>
-        <item>http://erasmusinfo.nl/m/contact</item>
-    </string-array>
-
-
-
-    <!-- Icons -->
-
-    <array name="icons">
-        <item>@drawable/home</item>
-        <item>@drawable/school_havovwo</item>
-        <item>@drawable/school_vmbo</item>
-        <item>@drawable/school_pro</item>
-        <item>@drawable/statistieken</item>
-        <item>@drawable/contact</item>
-    </array>
-
+    <string name="hello_world">Hello world!</string>
 </resources>

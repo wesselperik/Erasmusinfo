@@ -79,7 +79,8 @@ public class ChangeLogDialog {
 				"<style type=\"text/css\">"
 				+ "h1 { margin-left: 0px; font-size: 12pt; }" 
 				+ "li { margin-left: 0px; font-size: 9pt;}" 
-				+ "ul { padding-left: 30px;}" 
+				+ "ul { padding-left: 30px;}"
+				+ "body { background: #EEEEEE;}"
 				+ "</style>";
 	}
 	
@@ -128,9 +129,10 @@ public class ChangeLogDialog {
 		} 
 		
         //Get dialog title	        	
-       	int _resID = _Resource.getIdentifier(TITLE_CHANGELOG , "string", _PackageName);
-        String _Title = _Resource.getString(_resID);
-      	_Title = _Title + " v" + GetAppVersion();
+       	int _resID = _Resource.getIdentifier(TITLE_CHANGELOG, "string", _PackageName);
+//        String _Title = _Resource.getString(_resID);
+//        _Title = _Title + " v" + GetAppVersion();
+		String _Title = "Changelog";
  
         //Get Changelog xml resource id
       	_resID = _Resource.getIdentifier(CHANGELOG_XML, "xml", _PackageName);
