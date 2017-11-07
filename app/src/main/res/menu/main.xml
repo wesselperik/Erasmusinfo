@@ -1,8 +1,41 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/nav_prefs"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_share" android:title="@string/nav_share"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_changeschool"
+        android:title="@string/nav_changeschool"
+        android:icon="@mipmap/ic_school"
+        android:orderInCategory="0"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/school_havovwo"
+                    android:orderInCategory="1"
+                    app:showAsAction="never"
+                    android:title="@string/havovwo"/>
+                <item
+                    android:id="@+id/school_vmbo"
+                    android:orderInCategory="2"
+                    app:showAsAction="never"
+                    android:title="@string/vmbo"/>
+                <item
+                    android:id="@+id/school_pro"
+                    android:orderInCategory="3"
+                    app:showAsAction="never"
+                    android:title="@string/pro"/>
+            </group>
+        </menu>
+    </item>
+    <item android:id="@+id/action_settings"
+        android:title="@string/nav_prefs"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_about"
+        android:title="@string/nav_about"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_share"
+        android:title="@string/nav_share"
+        android:orderInCategory="300"
+        app:showAsAction="never" />
 </menu>

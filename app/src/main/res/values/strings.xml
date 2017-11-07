@@ -1,31 +1,27 @@
 <resources>
     <string name="app_name">Erasmusinfo</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name_lowercase">erasmusinfo</string>
 
-    <string name="nav_home">Home</string>
-    <string name="nav_havovwo">HAVO/VWO</string>
-    <string name="nav_vmbo">VMBO</string>
-    <string name="nav_pro">PrO</string>
-    <string name="nav_rooster">Rooster</string>
+    <string name="nav_infokanaal">Infokanaal</string>
     <string name="nav_prefs">Instellingen</string>
-    <string name="nav_share">Delen</string>
+    <string name="nav_changeschool">Verander vestiging</string>
+    <string name="nav_about">Over deze app</string>
+    <string name="nav_share">Deel deze app</string>
+    <string name="item_share">Mededeling/roosterwijziging delen</string>
+    <string name="article_share">Artikel delen</string>
+    <string name="item_sendemail">E-mail versturen</string>
+    <string name="about_ps">Bekijk in Google Play</string>
+    <string name="add_notification">Notificatie toevoegen</string>
 
-    <string name="pref_previously_started">pref_started</string>
+    <string name="error_no_internet">Geen internetverbinding</string>
+    <string name="error_unknown">Er is een fout opgetreden. Probeer het later nog eens. Als deze fout blijft verschijnen, neem contact op met de ontwikkelaar.</string>
 
     <string name="close">Sluiten</string>
 
-    <string-array name="titles">
-        <item>Home</item>
-        <item>HAVO/VWO</item>
-        <item>VMBO</item>
-        <item>PrO</item>
-        <item>Instellingen</item>
-    </string-array>
+    <string name="havovwo">HAVO/VWO</string>
+    <string name="vmbo">VMBO</string>
+    <string name="pro">PrO</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_first_startup">Welkom</string>
-    <string name="title_activity_settings">Instellingen</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="navigation_drawer_open">Menu openen</string>
+    <string name="navigation_drawer_close">Menu sluiten</string>
 </resources>

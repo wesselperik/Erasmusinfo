@@ -1,45 +1,27 @@
 <resources>
 
-    <!-- Erasmusinfo app themes -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/IndigoThemePrimary</item>
+        <item name="colorPrimaryDark">@color/IndigoThemePrimaryDark</item>
+        <item name="colorAccent">@color/IndigoThemeAccent</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="IndigoTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#3F51B5</item>
-        <item name="colorPrimaryDark">#303F9F</item>
-        <item name="colorAccent">#03A9F4</item>
-    </style>
-    <style name="BlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#0024ff</item>
-        <item name="colorPrimaryDark">#001fdc</item>
-        <item name="colorAccent">#007eff</item>
-    </style>
-    <style name="DarkBlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#003138</item>
-        <item name="colorPrimaryDark">#00262B</item>
-        <item name="colorAccent">#00AEC1</item>
-    </style>
-    <style name="GreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#007F02</item>
-        <item name="colorPrimaryDark">#007000</item>
-        <item name="colorAccent">#00DB00</item>
-    </style>
-    <style name="RedTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#EB0028</item>
-        <item name="colorPrimaryDark">#BC0028</item>
-        <item name="colorAccent">#FF6A00</item>
+    <style name="CollapsedAppBarText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="MainLayout">
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-
-    <style name="Transparent" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0.1sp</item>
     </style>
 
     <style name="DarkText">

@@ -1,0 +1,2 @@
+include ':app', ':library', ':wear'
+project(':library').projectDir = new File('app/libs/PersistentSearch/library')
