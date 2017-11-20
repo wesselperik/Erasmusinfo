@@ -11,6 +11,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,10 @@ import java.util.List;
 
 public class Infokanaal extends Fragment {
 
-    private final String TAG_MEDEDELINGEN = "mededelingen";
+    private final String TAG_MEDEDELINGEN = "posts";
     private final String TAG_ID = "id";
-    private final String TAG_TITLE = "titel";
-    private final String TAG_TEXT = "mededeling";
+    private final String TAG_TITLE = "title";
+    private final String TAG_TEXT = "content";
 
     public static final int CONNECTION_TIMEOUT = 60000;
     public static final int READ_TIMEOUT = 90000;
@@ -97,6 +98,7 @@ public class Infokanaal extends Fragment {
                     Snackbar snackbar = Snackbar
                             .make(container, getResources().getString(R.string.error_no_internet), Snackbar.LENGTH_LONG);
                     snackbar.show();
+                    Log.e("Infokanaal", "No internet connection!");
                 } else {
                     //Refreshing data on server
                     new GetMededelingen().execute();
@@ -128,6 +130,7 @@ public class Infokanaal extends Fragment {
                         Snackbar snackbar = Snackbar
                                 .make(container, getResources().getString(R.string.error_no_internet), Snackbar.LENGTH_LONG);
                         snackbar.show();
+                        Log.e("Infokanaal", "No internet connection!");
                     }
                 });
             }
@@ -155,7 +158,7 @@ public class Infokanaal extends Fragment {
             String schoolName = prefs.getString("settings_schoolname", "havovwo");
 
             try {
-                url = new URL("https://api.erasmusinfo.nl/roosterwijzigingen/" + schoolName + "/");
+                url = new URL("https://api.erasmusinfo.nl/v3/?location=" + schoolName);
             } catch (MalformedURLException mue) {
                 mue.printStackTrace();
                 return mue.toString();
@@ -174,6 +177,7 @@ public class Infokanaal extends Fragment {
                         Snackbar snackbar = Snackbar
                                 .make((ViewGroup) view.getParent(), getResources().getString(R.string.error_no_internet), Snackbar.LENGTH_LONG);
                         snackbar.show();
+                        Log.e("Infokanaal", "No internet connection!");
                     }
                 });
                 ioe.printStackTrace();
@@ -201,6 +205,7 @@ public class Infokanaal extends Fragment {
                     return (result.toString());
 
                 } else {
+                    Log.e("Infokanaal", "Invalid response code: " + response_code);
                     return ("unsuccessful");
                 }
 
@@ -211,6 +216,7 @@ public class Infokanaal extends Fragment {
                         Snackbar snackbar = Snackbar
                                 .make((ViewGroup) view.getParent(), getResources().getString(R.string.error_no_internet), Snackbar.LENGTH_LONG);
                         snackbar.show();
+                        Log.e("Infokanaal", "No internet connection!");
                     }
                 });
                 ioe.printStackTrace();
@@ -226,11 +232,15 @@ public class Infokanaal extends Fragment {
             mSwipeRefreshLayout.setRefreshing(false);
             mMededelingenList = new ArrayList<>();
 
+            Log.d("Result", result);
+
             try {
                 JSONObject jsonObj = new JSONObject(result);
 
                 // Get JSON array with mededelingen
                 JSONArray mededelingen = jsonObj.getJSONArray(TAG_MEDEDELINGEN);
+
+                Log.d("Mededelingen", "Length: " + mededelingen.length());
 
                 for (int i = 0; i < mededelingen.length(); i++) {
                     JSONObject c = mededelingen.getJSONObject(i);
@@ -259,6 +269,7 @@ public class Infokanaal extends Fragment {
                         snackbar.show();
                     }
                 });
+                Log.e("Infokanaal", "JSON exception: " + je.getMessage());
             }
         }
 

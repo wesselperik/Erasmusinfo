@@ -8,6 +8,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="55dp"
         android:dividerHeight="-1dp"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>
