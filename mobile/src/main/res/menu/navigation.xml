@@ -4,19 +4,19 @@
     <item
         android:id="@+id/nav_posts"
         android:enabled="true"
-        android:icon="@drawable/ic_about_info"
+        android:icon="@drawable/ic_nav_posts"
         android:title="Mededelingen"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/nav_changes"
         android:enabled="true"
-        android:icon="@drawable/ic_about_rate"
+        android:icon="@drawable/ic_nav_changes"
         android:title="Roosterwijzigingen"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/nav_news"
         android:enabled="true"
-        android:icon="@drawable/ic_about_contact"
+        android:icon="@drawable/ic_nav_news"
         android:title="Nieuws"
         app:showAsAction="ifRoom" />
 </menu>

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,8 +31,27 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private TabLayout tabLayout;
     private ViewPager viewPager;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nav_posts:
+                    viewPager.setCurrentItem(0, true);
+                    return true;
+                case R.id.nav_changes:
+                    viewPager.setCurrentItem(1, true);
+                    return true;
+                case R.id.nav_news:
+                    viewPager.setCurrentItem(2, true);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     public MainActivity() { }
 
@@ -53,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
         Analytics analytics = new Analytics(getApplicationContext());
         analytics.init();
 
@@ -73,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(Infokanaal.newInstance(), "Infokanaal");
+        adapter.addFragment(Infokanaal.newInstance(), "Mededelingen");
+        adapter.addFragment(Infokanaal.newInstance(), "Roosterwijzigingen");
         adapter.addFragment(Nieuws.newInstance(), "Nieuws");
         viewPager.setAdapter(adapter);
     }
