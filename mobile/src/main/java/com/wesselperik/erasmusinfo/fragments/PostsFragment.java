@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,13 +30,16 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import com.wesselperik.erasmusinfo.R;
-import com.wesselperik.erasmusinfo.adapters.PostAdapter;
+import com.wesselperik.erasmusinfo.adapters.PostsAdapter;
 import com.wesselperik.erasmusinfo.classes.Constants;
 import com.wesselperik.erasmusinfo.models.Post;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Wessel on 20-11-2017.
@@ -46,12 +51,14 @@ public class PostsFragment extends Fragment {
     private RequestQueue requestQueue;
     private Gson gson;
 
-    private RecyclerView mRecyclerView;
-    private PostAdapter mAdapter;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+
+    private PostsAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private DividerItemDecoration mDividerItemDecoration;
     private List<Post> mPostsList;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public PostsFragment() {
     }
@@ -80,12 +87,12 @@ public class PostsFragment extends Fragment {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
 
-        view = inflater.inflate(R.layout.fragment_infokanaal, container, false);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        view = inflater.inflate(R.layout.fragment_posts, container, false);
+        ButterKnife.bind(this, view);
+
         mLayoutManager = new LinearLayoutManager(getActivity());
         mDividerItemDecoration = new DividerItemDecoration(getActivity().getApplicationContext(), mLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(mDividerItemDecoration);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.IndigoThemeAccent, R.color.IndigoThemeAccent2, R.color.IndigoThemeAccent3);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -95,10 +102,10 @@ public class PostsFragment extends Fragment {
         });
 
         mPostsList = new ArrayList<>();
-        mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
+        mAdapter = new PostsAdapter(getActivity().getApplicationContext(), mPostsList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
+        mProgressBar.setVisibility(View.VISIBLE);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(Constants.POSTS)) {
             // Get posts from saved instance state
@@ -116,13 +123,14 @@ public class PostsFragment extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String location = prefs.getString("settings_schoolname", "havovwo");
         StringRequest request = new StringRequest(Request.Method.GET, Constants.API_URL + "?" + Constants.API_PARAMETER_LOCATION + "=" + location, onPostsLoaded, onPostsError);
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }
 
     private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            JsonParser parser = new JsonParser();
+        JsonParser parser = new JsonParser();
             JsonObject element = (JsonObject) parser.parse(response);
 
             JsonArray postsArray = element.getAsJsonArray(Constants.POSTS);
@@ -136,10 +144,11 @@ public class PostsFragment extends Fragment {
                 mPostsList.add(post);
             }
 
-            mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
+            mAdapter = new PostsAdapter(getActivity().getApplicationContext(), mPostsList);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mSwipeRefreshLayout.setRefreshing(false);
+            mProgressBar.setVisibility(View.GONE);
         }
     };
 

@@ -18,14 +18,14 @@ import java.util.List;
  * Created by Wessel on 20-11-2017.
  */
 
-public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
     List<Post> data = Collections.emptyList();
 
     // create constructor to initialize context and data sent from fragment
-    public PostAdapter(Context context, List<Post> data){
+    public PostsAdapter(Context context, List<Post> data){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
