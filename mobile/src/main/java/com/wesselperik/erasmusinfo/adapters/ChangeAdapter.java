@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wesselperik.erasmusinfo.R;
-import com.wesselperik.erasmusinfo.holders.ChangesHolder;
+import com.wesselperik.erasmusinfo.holders.ChangeHolder;
 import com.wesselperik.erasmusinfo.models.Change;
 
 import java.util.Collections;
@@ -17,26 +17,26 @@ import java.util.List;
  * Created by wesselperik on 21/11/2017.
  */
 
-public class ChangesAdapter extends RecyclerView.Adapter<ChangesHolder> {
+public class ChangeAdapter extends RecyclerView.Adapter<ChangeHolder> {
 
     private Context context;
     private LayoutInflater inflater;
     List<Change> data = Collections.emptyList();
 
-    public ChangesAdapter(Context context, List<Change> data) {
+    public ChangeAdapter(Context context, List<Change> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
     }
 
     @Override
-    public ChangesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChangeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_changes, parent, false);
-        return new ChangesHolder(view, context);
+        return new ChangeHolder(view, context);
     }
 
     @Override
-    public void onBindViewHolder(ChangesHolder holder, int position) {
+    public void onBindViewHolder(ChangeHolder holder, int position) {
         Change current = data.get(position);
         //DashboardChildAdapter adapter = new DashboardChildAdapter(context, current.getType(), current.getChildren());
 

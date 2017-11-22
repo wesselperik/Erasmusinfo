@@ -30,7 +30,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import com.wesselperik.erasmusinfo.R;
-import com.wesselperik.erasmusinfo.adapters.PostsAdapter;
+import com.wesselperik.erasmusinfo.adapters.PostAdapter;
 import com.wesselperik.erasmusinfo.classes.Constants;
 import com.wesselperik.erasmusinfo.models.Post;
 
@@ -55,7 +55,7 @@ public class PostsFragment extends Fragment {
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
-    private PostsAdapter mAdapter;
+    private PostAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private DividerItemDecoration mDividerItemDecoration;
     private List<Post> mPostsList;
@@ -102,7 +102,7 @@ public class PostsFragment extends Fragment {
         });
 
         mPostsList = new ArrayList<>();
-        mAdapter = new PostsAdapter(getActivity().getApplicationContext(), mPostsList);
+        mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mProgressBar.setVisibility(View.VISIBLE);
@@ -144,7 +144,7 @@ public class PostsFragment extends Fragment {
                 mPostsList.add(post);
             }
 
-            mAdapter = new PostsAdapter(getActivity().getApplicationContext(), mPostsList);
+            mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mSwipeRefreshLayout.setRefreshing(false);

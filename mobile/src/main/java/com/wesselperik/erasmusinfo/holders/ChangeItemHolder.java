@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.models.ChangeItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,23 +17,17 @@ import butterknife.ButterKnife;
  * Created by wesselperik on 21/11/2017.
  */
 
-public class ChangesHolder extends RecyclerView.ViewHolder {
+public class ChangeItemHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.title) TextView tvTitle;
-    @BindView(R.id.recyclerView) RecyclerView rvChanges;
     private Context context;
 
-    public ChangesHolder(View itemView, Context context) {
+    public ChangeItemHolder(View itemView, Context context) {
         super(itemView);
         this.context = context;
         ButterKnife.bind(this, itemView);
     }
 
-    public void bindViews(String title, RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
-        tvTitle.setText(title);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        rvChanges.setLayoutManager(linearLayoutManager);
-        ViewCompat.setNestedScrollingEnabled(rvChanges, false);
-        rvChanges.setAdapter(adapter);
+    public void bindViews(ChangeItem item) {
+        tvTitle.setText(item.getItemClass());
     }
 }
