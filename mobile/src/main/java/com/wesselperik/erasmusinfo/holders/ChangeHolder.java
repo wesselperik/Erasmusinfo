@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.adapters.ChangeItemAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +28,7 @@ public class ChangeHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bindViews(String title, RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
+    public void bindViews(String title, ChangeItemAdapter adapter) {
         tvTitle.setText(title);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

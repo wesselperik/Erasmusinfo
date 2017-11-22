@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wesselperik on 21/11/2017.
@@ -16,12 +17,13 @@ public class Change implements Parcelable {
     @SerializedName("id")
     public long ID;
     public String title;
-    public ArrayList<ChangeItem> changes;
+    public List<ChangeItem> changes;
 
     private Change(Parcel in) {
         ID = in.readLong();
         title = in.readString();
-        changes = in.readArrayList(null);
+        changes = new ArrayList<ChangeItem>();
+        in.readList(changes, null);
     }
 
     public long getId() {
@@ -32,7 +34,7 @@ public class Change implements Parcelable {
         return title;
     }
 
-    public ArrayList<ChangeItem> getChanges() {
+    public List<ChangeItem> getChanges() {
         return changes;
     }
 

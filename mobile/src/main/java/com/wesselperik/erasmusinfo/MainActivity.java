@@ -20,6 +20,7 @@ import com.wesselperik.erasmusinfo.activities.AboutActivity;
 import com.wesselperik.erasmusinfo.activities.SettingsActivity;
 
 import com.wesselperik.erasmusinfo.classes.Analytics;
+import com.wesselperik.erasmusinfo.fragments.ChangesFragment;
 import com.wesselperik.erasmusinfo.fragments.Infokanaal;
 import com.wesselperik.erasmusinfo.fragments.Nieuws;
 import com.wesselperik.erasmusinfo.fragments.PostsFragment;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(PostsFragment.newInstance(), "Mededelingen");
-        adapter.addFragment(Infokanaal.newInstance(), "Roosterwijzigingen");
+        adapter.addFragment(ChangesFragment.newInstance(), "Roosterwijzigingen");
         adapter.addFragment(Nieuws.newInstance(), "Nieuws");
         viewPager.setAdapter(adapter);
     }

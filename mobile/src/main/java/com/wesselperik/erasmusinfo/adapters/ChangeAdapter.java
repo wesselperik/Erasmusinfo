@@ -38,9 +38,9 @@ public class ChangeAdapter extends RecyclerView.Adapter<ChangeHolder> {
     @Override
     public void onBindViewHolder(ChangeHolder holder, int position) {
         Change current = data.get(position);
-        //DashboardChildAdapter adapter = new DashboardChildAdapter(context, current.getType(), current.getChildren());
+        ChangeItemAdapter adapter = new ChangeItemAdapter(context, current.getChanges());
 
-        //holder.bindViews(current.getTitle(), adapter); // TODO fix this
+        holder.bindViews(current.getTitle(), adapter);
     }
 
     @Override

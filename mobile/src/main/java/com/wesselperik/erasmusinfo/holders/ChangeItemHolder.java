@@ -1,8 +1,6 @@
 package com.wesselperik.erasmusinfo.holders;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +16,10 @@ import butterknife.ButterKnife;
  */
 
 public class ChangeItemHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.title) TextView tvTitle;
+    @BindView(R.id.tvClass) TextView tvClass;
+    @BindView(R.id.tvHour) TextView tvHour;
+    @BindView(R.id.tvTeacher) TextView tvTeacher;
+    @BindView(R.id.tvComment) TextView tvComment;
     private Context context;
 
     public ChangeItemHolder(View itemView, Context context) {
@@ -28,6 +29,9 @@ public class ChangeItemHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindViews(ChangeItem item) {
-        tvTitle.setText(item.getItemClass());
+        tvClass.setText(item.getItemClass());
+        tvHour.setText(item.getItemHour());
+        tvTeacher.setText(item.getItemTeacher());
+        tvComment.setText(item.getItemComment());
     }
 }
