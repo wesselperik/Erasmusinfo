@@ -16,6 +16,13 @@ public class ChangeItem implements Parcelable {
     public String itemTeacher;
     public String itemComment;
 
+    public ChangeItem(String itemClass, String itemHour, String itemTeacher, String itemComment) {
+        this.itemClass = itemClass;
+        this.itemHour = itemHour;
+        this.itemTeacher = itemTeacher;
+        this.itemComment = itemComment;
+    }
+
     private ChangeItem(Parcel in) {
         itemClass = in.readString();
         itemHour = in.readString();

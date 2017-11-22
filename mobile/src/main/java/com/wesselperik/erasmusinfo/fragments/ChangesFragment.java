@@ -34,6 +34,9 @@ import com.wesselperik.erasmusinfo.models.Change;
 import com.wesselperik.erasmusinfo.models.ChangeItem;
 import com.wesselperik.erasmusinfo.models.Post;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,12 +142,32 @@ public class ChangesFragment extends Fragment {
 
             Log.i("ChangesFragment", changes.size() + " changes loaded.");
             mChangesList = new ArrayList<>();
+
+            int i = 0;
             for (Change change : changes) {
                 Log.i("ChangesFragment", change.ID + ": " + change.title);
                 Log.d("ChangesFragment", change.getChanges().size() + " change items loaded.");
-                for (ChangeItem item : change.getChanges()) {
-                    Log.d("ChangesFragment", "Item: " + item.getItemClass() + " - " + item.getItemHour() + " - " + item.getItemTeacher() + " - " + item.getItemComment());
+
+                JsonObject item = (JsonObject) element.getAsJsonArray(Constants.CHANGES).get(i);
+                JsonArray changeItemsArray = item.getAsJsonArray(Constants.CHANGE_ITEMS);
+
+                change.changes = new ArrayList<>();
+                for (int j = 0; j < changeItemsArray.size(); j++) {
+                    Log.d("Item", changeItemsArray.get(j).getAsJsonObject().toString());
+                    //ChangeItem changeItem = gson.fromJson(changeItemsArray.get(j).getAsJsonObject().toString(), ChangeItem.class);
+                    ChangeItem changeItem = new ChangeItem(changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_CLASS).getAsString(),
+                            changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_HOUR).getAsString(),
+                            changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_TEACHER).getAsString(),
+                            changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_COMMENT).getAsString());
+                    Log.d("ChangesFragment", "Item: " + changeItem.getItemClass() + " - " + changeItem.getItemHour() + " - " + changeItem.getItemTeacher() + " - " + changeItem.getItemComment());
+                    change.changes.add(changeItem);
                 }
+
+                //Log.i("ChangesFragment", "Items array: " + changeItemsArray.toString());
+
+//                for (ChangeItem item : change.getChanges()) {
+//                    Log.d("ChangesFragment", "Item: " + item.getItemClass() + " - " + item.getItemHour() + " - " + item.getItemTeacher() + " - " + item.getItemComment());
+//                }
 
 //                JsonArray changeItemsArray = change.getAsJsonArray(Constants.CHANGE_ITEMS);
 //                Type listType = new TypeToken<List<Change>>(){}.getType();
@@ -152,6 +175,7 @@ public class ChangesFragment extends Fragment {
 
 
                 mChangesList.add(change);
+                i++;
             }
 
             mAdapter = new ChangeAdapter(getActivity().getApplicationContext(), mChangesList);
