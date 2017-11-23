@@ -122,6 +122,11 @@ public class ChangesFragment extends Fragment {
         return view;
     }
 
+    public void refresh() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        fetchChanges();
+    }
+
     private void fetchChanges() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String location = prefs.getString("settings_schoolname", "havovwo");

@@ -119,6 +119,11 @@ public class PostsFragment extends Fragment {
         return view;
     }
 
+    public void refresh() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        fetchPosts();
+    }
+
     private void fetchPosts() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String location = prefs.getString("settings_schoolname", "havovwo");

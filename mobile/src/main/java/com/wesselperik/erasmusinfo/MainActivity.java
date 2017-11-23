@@ -129,7 +129,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 0);
+        PostsFragment postsFragment = (PostsFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 0);
+        ChangesFragment changesFragment = (ChangesFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 1);
 
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -143,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
                 edit.putString("settings_schoolname", "havovwo");
                 edit.apply();
 
-                ((Infokanaal) page).refresh();
+                postsFragment.refresh();
+                changesFragment.refresh();
                 return true;
 
             case R.id.school_vmbo:
@@ -154,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
                 edit2.putString("settings_schoolname", "vmbo");
                 edit2.apply();
 
-                ((Infokanaal) page).refresh();
+                postsFragment.refresh();
+                changesFragment.refresh();
                 return true;
 
             case R.id.school_pro:
@@ -165,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
                 edit3.putString("settings_schoolname", "pro");
                 edit3.apply();
 
-                ((Infokanaal) page).refresh();
+                postsFragment.refresh();
+                changesFragment.refresh();
                 return true;
 
             case R.id.action_settings:

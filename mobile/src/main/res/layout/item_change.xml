@@ -1,57 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:gravity="center_vertical"
-                android:weightSum="100">
+        <TableRow
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvClass"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="25"
-                    android:paddingBottom="2dip"
-                    android:paddingTop="6dip"
-                    android:paddingLeft="10dp"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvHour"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:paddingBottom="2dip"
-                    android:paddingTop="6dip"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvTeacher"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="30"
-                    android:paddingBottom="2dip"
-                    android:paddingTop="6dip"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvComment"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="35"
-                    android:paddingBottom="2dip"
-                    android:paddingTop="6dip"
                     android:textSize="12sp" />
 
-            </LinearLayout>
-
-</LinearLayout>
+        </TableRow>
