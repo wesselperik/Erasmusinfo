@@ -34,7 +34,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // Inflate the layout when viewholder created
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_item, parent,false);
+        View view = inflater.inflate(R.layout.item_post, parent,false);
         return new PostHolder(view);
     }
 

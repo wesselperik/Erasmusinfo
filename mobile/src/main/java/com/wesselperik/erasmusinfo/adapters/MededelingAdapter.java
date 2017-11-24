@@ -2,11 +2,7 @@ package com.wesselperik.erasmusinfo.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,7 +35,7 @@ public class MededelingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     // Inflate the layout when viewholder created
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_item, parent,false);
+        View view = inflater.inflate(R.layout.item_post, parent,false);
         MededelingHolder holder = new MededelingHolder(view);
         return holder;
     }

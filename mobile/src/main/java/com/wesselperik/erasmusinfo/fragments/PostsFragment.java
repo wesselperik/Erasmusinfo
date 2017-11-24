@@ -57,7 +57,6 @@ public class PostsFragment extends Fragment {
 
     private PostAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    private DividerItemDecoration mDividerItemDecoration;
     private List<Post> mPostsList;
 
     public PostsFragment() {
@@ -91,8 +90,6 @@ public class PostsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mDividerItemDecoration = new DividerItemDecoration(getActivity().getApplicationContext(), mLayoutManager.getOrientation());
-        mRecyclerView.addItemDecoration(mDividerItemDecoration);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.IndigoThemeAccent, R.color.IndigoThemeAccent2, R.color.IndigoThemeAccent3);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
