@@ -63,11 +63,11 @@ public class ChangesFragment extends Fragment {
     private List<Change> mChangesList;
 
     public ChangesFragment() {
+        // empty constructor
     }
 
     public static ChangesFragment newInstance() {
-        ChangesFragment fragment = new ChangesFragment();
-        return fragment;
+        return new ChangesFragment();
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class ChangesFragment extends Fragment {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
 
-        view = inflater.inflate(R.layout.fragment_posts, container, false);
+        view = inflater.inflate(R.layout.fragment_changes, container, false);
         ButterKnife.bind(this, view);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -152,7 +152,7 @@ public class ChangesFragment extends Fragment {
 
                 change.changes = new ArrayList<>();
                 for (int j = 0; j < changeItemsArray.size(); j++) {
-                    //ChangeItem changeItem = gson.fromJson(changeItemsArray.get(j).getAsJsonObject().toString(), ChangeItem.class);
+                    // ChangeItem changeItem = gson.fromJson(changeItemsArray.get(j).getAsJsonObject().toString(), ChangeItem.class);
                     ChangeItem changeItem = new ChangeItem(changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_CLASS).getAsString(),
                             changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_HOUR).getAsString(),
                             changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_TEACHER).getAsString(),
@@ -176,7 +176,6 @@ public class ChangesFragment extends Fragment {
         @Override
         public void onErrorResponse(VolleyError error) {
             Log.e("ChangesFragment", error.toString());
-
             mSwipeRefreshLayout.setRefreshing(false);
         }
     };
