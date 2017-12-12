@@ -89,7 +89,6 @@ public class Infokanaal extends Fragment {
                 mLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(mDividerItemDecoration);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.IndigoThemeAccent, R.color.IndigoThemeAccent2, R.color.IndigoThemeAccent3);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

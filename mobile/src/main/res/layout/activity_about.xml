@@ -171,7 +171,7 @@
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:text="Beoordelen"
-                            android:textColor="@color/IndigoThemeAccent"
+                            android:textColor="@color/colorAccent"
                             android:background="?android:attr/selectableItemBackground"
                             android:onClick="goToPlayStore"/>
 
@@ -312,7 +312,7 @@
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:text="Stuur een e-mail"
-                            android:textColor="@color/IndigoThemeAccent"
+                            android:textColor="@color/colorAccent"
                             android:background="?android:attr/selectableItemBackground"
                             android:onClick="mailDeveloper"/>
 

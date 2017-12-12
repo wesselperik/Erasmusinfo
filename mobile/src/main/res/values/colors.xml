@@ -3,12 +3,10 @@
     <color name="second_grey">#ff999999</color>
     <color name="card_white">#ffffffff</color>
     <color name="card_shadow">#8c666666</color>
-    <color name="IndigoThemePrimary">#3F51B5</color>
-    <color name="IndigoThemeAccent">#03A9F4</color>
-    <color name="IndigoThemeAccent2">#2196F3</color>
-    <color name="IndigoThemeAccent3">#673ab7</color>
-    <color name="IndigoThemePrimaryDark">#303F9F</color>
-    <color name="TransparentBackground">#aa000000</color>
+    <color name="colorPrimary">#59C2FF</color>
+    <color name="colorPrimaryDark">#1270E3</color>
+    <color name="colorAccent">#379BF2</color>
+    <color name="transparentBackground">#aa000000</color>
     <color name="grey">#d4d4d4</color>
     <color name="darkgrey">#717171</color>
 </resources>

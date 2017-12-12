@@ -29,7 +29,7 @@ public class FCMCallbackService extends FirebaseMessagingService {
     }
 
     private void sendNotification(RemoteMessage.Notification notification) {
-        int color = getResources().getColor(R.color.IndigoThemeAccent);
+        int color = getResources().getColor(R.color.colorAccent);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         Intent intent = new Intent(this, MainActivity2.class);

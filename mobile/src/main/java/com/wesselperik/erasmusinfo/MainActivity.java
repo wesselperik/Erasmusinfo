@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.activities.AboutActivity;
 import com.wesselperik.erasmusinfo.activities.SettingsActivity;
@@ -26,6 +28,8 @@ import com.wesselperik.erasmusinfo.fragments.Infokanaal;
 import com.wesselperik.erasmusinfo.fragments.Nieuws;
 import com.wesselperik.erasmusinfo.fragments.PostsFragment;
 import com.wesselperik.erasmusinfo.services.WearService;
+import com.wesselperik.erasmusinfo.views.TextViewBold;
+import com.wesselperik.erasmusinfo.views.TextViewMedium;
 //import com.wesselperik.erasmusinfo.fragments.Nieuws;
 
 import java.util.ArrayList;
@@ -34,28 +38,34 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private ViewPager viewPager;
     private CollapsingToolbarLayout toolbarLayout;
+    private AppBarLayout appBar;
+    private TextViewBold toolbarTitle;
+    private TextViewBold toolbarContentTitle;
+    private BottomNavigationView bottomNavigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.nav_posts:
-                    viewPager.setCurrentItem(0, true);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, PostsFragment.newInstance(), "PostsFragment").commit();
+                    toolbarContentTitle.setText("mededelingen");
                     return true;
                 case R.id.nav_changes:
-                    viewPager.setCurrentItem(1, true);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, ChangesFragment.newInstance(), "ChangesFragment").commit();
+                    toolbarContentTitle.setText("roosterwijzigingen");
                     return true;
                 case R.id.nav_news:
-                    viewPager.setCurrentItem(2, true);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, Nieuws.newInstance(), "Nieuws").commit();
+                    toolbarContentTitle.setText("nieuws");
                     return true;
             }
             return false;
         }
-
     };
+
+    private boolean isTitleShown = false;
 
     public MainActivity() { }
 
@@ -75,15 +85,51 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                toolbarContentTitle.setAlpha(1.0f - Math.abs(verticalOffset / (float)
+                        appBarLayout.getTotalScrollRange()));
+
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    toolbarTitle.setText("erasmusinfo");
+                    isTitleShown = true;
+                } else if(isTitleShown) {
+                    toolbarTitle.setText(" ");
+                    isTitleShown = false;
+                }
+
+                /*if (verticalOffset == 0) {
+                    onCollapsed();
+                } else {
+                    onExpanded();
+                }*/
+            }
+        });
 
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
         toolbarLayout.setTitle(" ");
 
+        toolbarTitle = (TextViewBold) findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(" ");
+
+        toolbarContentTitle = (TextViewBold) findViewById(R.id.toolbar_content_title);
+
+        bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         Analytics analytics = new Analytics(getApplicationContext());
         analytics.init();
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, PostsFragment.newInstance(), "PostsFragment").commit();
+        toolbarContentTitle.setText("mededelingen");
     }
 
     @Override
@@ -94,14 +140,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(PostsFragment.newInstance(), "Mededelingen");
-        adapter.addFragment(ChangesFragment.newInstance(), "Roosterwijzigingen");
-        adapter.addFragment(Nieuws.newInstance(), "Nieuws");
-        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -132,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         PostsFragment postsFragment = (PostsFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 0);
         ChangesFragment changesFragment = (ChangesFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 1);
@@ -149,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
                 edit.putString("settings_schoolname", "havovwo");
                 edit.apply();
 
-                postsFragment.refresh();
-                changesFragment.refresh();
+                if (postsFragment != null) postsFragment.refresh();
+                if (changesFragment != null) changesFragment.refresh();
                 return true;
 
             case R.id.school_vmbo:
@@ -161,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
                 edit2.putString("settings_schoolname", "vmbo");
                 edit2.apply();
 
-                postsFragment.refresh();
-                changesFragment.refresh();
+                if (postsFragment != null) postsFragment.refresh();
+                if (changesFragment != null) changesFragment.refresh();
                 return true;
 
             case R.id.school_pro:
@@ -173,8 +210,8 @@ public class MainActivity extends AppCompatActivity {
                 edit3.putString("settings_schoolname", "pro");
                 edit3.apply();
 
-                postsFragment.refresh();
-                changesFragment.refresh();
+                if (postsFragment != null) postsFragment.refresh();
+                if (changesFragment != null) changesFragment.refresh();
                 return true;
 
             case R.id.action_settings:
