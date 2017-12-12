@@ -37,7 +37,8 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/nav_prefs"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -59,7 +60,7 @@
             android:name=".activities.AboutActivity"
             android:label="Over Erasmusinfo"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
