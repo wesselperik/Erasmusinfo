@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         appBar = (AppBarLayout) findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-
             int scrollRange = -1;
 
             @Override
@@ -105,12 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     toolbarTitle.setText(" ");
                     isTitleShown = false;
                 }
-
-                /*if (verticalOffset == 0) {
-                    onCollapsed();
-                } else {
-                    onExpanded();
-                }*/
             }
         });
 

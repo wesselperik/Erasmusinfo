@@ -7,6 +7,8 @@ package com.wesselperik.erasmusinfo.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,8 +18,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.views.TextViewBold;
 
 public class AboutActivity extends ActionBarActivity {
+
+    private Toolbar toolbar;
+    private CollapsingToolbarLayout toolbarLayout;
+    private AppBarLayout appBar;
+    private TextViewBold toolbarContentTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +33,32 @@ public class AboutActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_about);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                toolbarContentTitle.setAlpha(1.0f - Math.abs(verticalOffset / (float)
+                        appBarLayout.getTotalScrollRange()));
+
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+            }
+        });
+
+        toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
+        toolbarLayout.setTitle(" ");
+
+        toolbarContentTitle = (TextViewBold) findViewById(R.id.toolbar_content_title);
+        toolbarContentTitle.setText("over erasmusinfo");
 
         TextView section1 = (TextView) findViewById(R.id.text_section1);
         section1.setText("In 2014 ben ik begonnen met de ontwikkeling van deze app, om een alternatief te bieden voor het Infokanaal van Het Erasmus, zodat deze beter te lezen is op je telefoon! Let op: deze app is officieel niet van Het Erasmus en gemaakt door een oud-leerling.");
