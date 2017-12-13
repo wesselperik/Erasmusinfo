@@ -25,4 +25,6 @@ public class Constants {
     public final static String CHANGE_ITEM_HOUR = "hour";
     public final static String CHANGE_ITEM_TEACHER = "teacher";
     public final static String CHANGE_ITEM_COMMENT = "comment";
+
+    public final static String NEWS = "news";
 }

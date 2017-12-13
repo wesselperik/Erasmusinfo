@@ -16,18 +16,22 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.wesselperik.erasmusinfo.activities.AboutActivity;
 import com.wesselperik.erasmusinfo.activities.SettingsActivity;
 
 import com.wesselperik.erasmusinfo.classes.Analytics;
 import com.wesselperik.erasmusinfo.fragments.ChangesFragment;
 import com.wesselperik.erasmusinfo.fragments.Infokanaal;
+import com.wesselperik.erasmusinfo.fragments.NewsFragment;
 import com.wesselperik.erasmusinfo.fragments.Nieuws;
 import com.wesselperik.erasmusinfo.fragments.PostsFragment;
+import com.wesselperik.erasmusinfo.services.FCMInitializationService;
 import com.wesselperik.erasmusinfo.services.WearService;
 import com.wesselperik.erasmusinfo.views.TextViewBold;
 import com.wesselperik.erasmusinfo.views.TextViewMedium;
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private CollapsingToolbarLayout toolbarLayout;
     private AppBarLayout appBar;
-    private TextViewBold toolbarTitle;
+    private TextViewMedium toolbarTitle;
     private TextViewBold toolbarContentTitle;
     private BottomNavigationView bottomNavigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     toolbarContentTitle.setText("roosterwijzigingen");
                     return true;
                 case R.id.nav_news:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, Nieuws.newInstance(), "Nieuws").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, NewsFragment.newInstance(), "Nieuws").commit();
                     toolbarContentTitle.setText("nieuws");
                     return true;
             }
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         startService(new Intent(this, WearService.class));
+        startService(new Intent(this, FCMInitializationService.class));
 
         super.onCreate(savedInstanceState);
 
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
         toolbarLayout.setTitle(" ");
 
-        toolbarTitle = (TextViewBold) findViewById(R.id.toolbar_title);
+        toolbarTitle = (TextViewMedium) findViewById(R.id.toolbar_title);
         toolbarTitle.setText(" ");
 
         toolbarContentTitle = (TextViewBold) findViewById(R.id.toolbar_content_title);
@@ -124,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, PostsFragment.newInstance(), "PostsFragment").commit();
         toolbarContentTitle.setText("mededelingen");
+
+        Log.d("Firebase token", FirebaseInstanceId.getInstance().getToken());
     }
 
     @Override
@@ -187,37 +194,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
-    static void restartMain(Activity activity){
-        activity.startActivity(new Intent(activity, MainActivity.class));
-    }
 }
 
