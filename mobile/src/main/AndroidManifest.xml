@@ -67,16 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wesselperik.erasmusinfo.MainActivity" />
         </activity>
-        <activity
-            android:name=".activities.NotificationsActivity"
-            android:label="Notificaties"
-            android:parentActivityName=".activities.SettingsActivity" >
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.wesselperik.erasmusinfo.activities.SettingsActivity" />
-        </activity>
 
         <receiver android:name=".classes.Autostart" >
             <intent-filter>

@@ -7,14 +7,13 @@
             android:title="Vestiging"
             android:summary="Kies jouw vestiging"
             android:key="settings_schoolname"
-            android:icon="@mipmap/ic_settings_school"
             android:defaultValue="havovwo"
             android:entries="@array/schoolArray"
             android:entryValues="@array/schoolValues" />
-        <Preference
+        <!--<Preference
             android:title="Notificaties"
             android:summary="Beheer je notificaties"
-            android:key="settings_notifications"/>
+            android:key="settings_notifications"/>-->
     </PreferenceCategory>
 
     <PreferenceCategory

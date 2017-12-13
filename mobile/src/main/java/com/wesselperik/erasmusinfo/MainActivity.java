@@ -1,5 +1,6 @@
 package com.wesselperik.erasmusinfo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -144,67 +145,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String school = prefs.getString("settings_schoolname", "havovwo");
-        if (school.equals("havovwo")) {
-            menu.findItem(R.id.school_havovwo).setChecked(true);
-        }else if (school.equals("vmbo")) {
-            menu.findItem(R.id.school_vmbo).setChecked(true);
-        }else if (school.equals("pro")) {
-            menu.findItem(R.id.school_pro).setChecked(true);
-        }else{
-            menu.findItem(R.id.school_havovwo).setChecked(true);
-        }
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        PostsFragment postsFragment = (PostsFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 0);
-        ChangesFragment changesFragment = (ChangesFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + 1);
-
         switch (item.getItemId()) {
             case android.R.id.home:
-                return true;
-
-            case R.id.school_havovwo:
-                if (!item.isChecked()){
-                    item.setChecked(true);
-                }
-                SharedPreferences.Editor edit = prefs.edit();
-                edit.putString("settings_schoolname", "havovwo");
-                edit.apply();
-
-                if (postsFragment != null) postsFragment.refresh();
-                if (changesFragment != null) changesFragment.refresh();
-                return true;
-
-            case R.id.school_vmbo:
-                if (!item.isChecked()){
-                    item.setChecked(true);
-                }
-                SharedPreferences.Editor edit2 = prefs.edit();
-                edit2.putString("settings_schoolname", "vmbo");
-                edit2.apply();
-
-                if (postsFragment != null) postsFragment.refresh();
-                if (changesFragment != null) changesFragment.refresh();
-                return true;
-
-            case R.id.school_pro:
-                if (!item.isChecked()){
-                    item.setChecked(true);
-                }
-                SharedPreferences.Editor edit3 = prefs.edit();
-                edit3.putString("settings_schoolname", "pro");
-                edit3.apply();
-
-                if (postsFragment != null) postsFragment.refresh();
-                if (changesFragment != null) changesFragment.refresh();
                 return true;
 
             case R.id.action_settings:
@@ -273,5 +216,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    static void restartMain(Activity activity){
+        activity.startActivity(new Intent(activity, MainActivity.class));
+    }
 }
 

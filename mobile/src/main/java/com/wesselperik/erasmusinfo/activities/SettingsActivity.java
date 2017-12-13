@@ -5,37 +5,72 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.Preference;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
-import com.wesselperik.erasmusinfo.MainActivity2;
+import com.wesselperik.erasmusinfo.MainActivity;
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.views.TextViewBold;
 
 /**
  * Created by Wessel on 3-9-2015.
  */
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
+    private CollapsingToolbarLayout toolbarLayout;
+    private AppBarLayout appBar;
+    private TextViewBold toolbarContentTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
+
+        setContentView(R.layout.activity_settings);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                toolbarContentTitle.setAlpha(1.0f - Math.abs(verticalOffset / (float)
+                        appBarLayout.getTotalScrollRange()));
+
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+            }
+        });
+
+        toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
+        toolbarLayout.setTitle(" ");
+
+        toolbarContentTitle = (TextViewBold) findViewById(R.id.toolbar_content_title);
+        toolbarContentTitle.setText("instellingen");
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new PrefsFragment())
+                .commit();
     }
 
-    public static class PrefsFragment extends PreferenceFragment {
-
-        public static PrefsFragment newInstance() {
-            PrefsFragment fragment = new PrefsFragment();
-            return fragment;
-        }
+    public static class PrefsFragment extends PreferenceFragmentCompat {
 
         public PrefsFragment() {
         }
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        public void onCreatePreferences(Bundle bundle, String s) {
 
             addPreferencesFromResource(R.xml.preferences);
 
@@ -48,7 +83,7 @@ public class SettingsActivity extends ActionBarActivity {
                 }
             });
 
-            final Preference notificationsPreference = findPreference("settings_notifications");
+            /*final Preference notificationsPreference = findPreference("settings_notifications");
             notificationsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick (Preference preference)
@@ -58,7 +93,7 @@ public class SettingsActivity extends ActionBarActivity {
 
                     return true;
                 }
-            });
+            });*/
 
             final Preference versionInfo = findPreference("info_version");
             try {
@@ -66,8 +101,6 @@ public class SettingsActivity extends ActionBarActivity {
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-
-
         }
 
         @Override
@@ -84,14 +117,13 @@ public class SettingsActivity extends ActionBarActivity {
 
         public String appVersion() throws PackageManager.NameNotFoundException {
             PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-            String version = "v" + pInfo.versionName;
+            String version = "v" + pInfo.versionName + " (build " + pInfo.versionCode + ")";
             return version;
         }
 
     }
 
-
     static void restartMain(Activity activity){
-        activity.startActivity(new Intent(activity, MainActivity2.class));
+        activity.startActivity(new Intent(activity, MainActivity.class));
     }
 }

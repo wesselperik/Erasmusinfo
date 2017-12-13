@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wesselperik.erasmusinfo.MainActivity2;
 import com.wesselperik.erasmusinfo.R;
 
 public class NieuwsDetailActivity extends ActionBarActivity {
@@ -150,9 +149,5 @@ public class NieuwsDetailActivity extends ActionBarActivity {
             super.onAttach(activity);
         }
 
-    }
-
-    static void restartMain(Activity activity){
-        activity.startActivity(new Intent(activity, MainActivity2.class));
     }
 }
