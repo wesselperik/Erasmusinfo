@@ -21,6 +21,7 @@ import com.wesselperik.erasmusinfo.R;
 import com.wesselperik.erasmusinfo.views.TextViewBold;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -39,9 +40,9 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_about);
+        ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 

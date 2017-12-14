@@ -16,29 +16,30 @@ import com.wesselperik.erasmusinfo.MainActivity;
 import com.wesselperik.erasmusinfo.R;
 import com.wesselperik.erasmusinfo.views.TextViewBold;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Wessel on 3-9-2015.
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private CollapsingToolbarLayout toolbarLayout;
-    private AppBarLayout appBar;
-    private TextViewBold toolbarContentTitle;
+    @BindView(R.id.toolbar) private Toolbar toolbar;
+    @BindView(R.id.collapsingtoolbar) private CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.appbar) private AppBarLayout appBar;
+    @BindView(R.id.toolbar_content_title) private TextViewBold toolbarContentTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_settings);
+        ButterKnife.bind(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             int scrollRange = -1;
 
@@ -53,10 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
         toolbarLayout.setTitle(" ");
-
-        toolbarContentTitle = (TextViewBold) findViewById(R.id.toolbar_content_title);
         toolbarContentTitle.setText("instellingen");
 
         getSupportFragmentManager().beginTransaction()
@@ -86,8 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
             /*final Preference notificationsPreference = findPreference("settings_notifications");
             notificationsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
-                public boolean onPreferenceClick (Preference preference)
-                {
+                public boolean onPreferenceClick (Preference preference) {
                     //Intent i = new Intent(getActivity().getApplicationContext(), NotificationsActivity.class);
                     //startActivity(i);
 
