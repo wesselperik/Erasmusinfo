@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.services.WearService;
 import com.wesselperik.erasmusinfo.views.TextViewBold;
 
 import butterknife.BindView;
@@ -76,6 +77,19 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     restartMain(getActivity());
+                    return true;
+                }
+            });
+
+            final Preference wearPreference = findPreference("settings_wear_service");
+            wearPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if ((boolean) newValue) {
+                        getActivity().startService(new Intent(getActivity(), WearService.class));
+                    } else {
+                        getActivity().stopService(new Intent(getActivity(), WearService.class));
+                    }
                     return true;
                 }
             });

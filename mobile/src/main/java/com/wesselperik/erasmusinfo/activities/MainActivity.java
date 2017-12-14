@@ -1,7 +1,9 @@
 package com.wesselperik.erasmusinfo.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
@@ -67,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
             savedInstanceState = getIntent().getExtras().getBundle("bundle");
         }
 
-        startService(new Intent(this, WearService.class));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean wearServiceEnabled = prefs.getBoolean("settings_wear_service", false);
+        if (wearServiceEnabled) startService(new Intent(this, WearService.class));
+
         startService(new Intent(this, FCMInitializationService.class));
 
         super.onCreate(savedInstanceState);

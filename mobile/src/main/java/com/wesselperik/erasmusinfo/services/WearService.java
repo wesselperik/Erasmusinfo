@@ -47,12 +47,12 @@ public class WearService extends Service implements GoogleApiClient.ConnectionCa
         return null;
     }
     public void onDestroy() {
-        Log.w("Erasmusinfo", "InfokanaalService gestopt.");
+        Log.w("Erasmusinfo", "Wearservice gestopt.");
     }
 
     @Override
     public void onCreate() {
-        Log.w("Erasmusinfo", "InfokanaalService gestart.");
+        Log.w("Erasmusinfo", "WearService gestart.");
         googleClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .addConnectionCallbacks(this)
@@ -106,7 +106,7 @@ public class WearService extends Service implements GoogleApiClient.ConnectionCa
 
                 String schoolName = prefs.getString("settings_schoolname", "havovwo");
 
-                String jsonStr = sh.makeServiceCall("http://api.erasmusinfo.nl/roosterwijzigingen/" + schoolName + "/", ServiceHandler.GET);
+                String jsonStr = sh.makeServiceCall("http://api.erasmusinfo.nl/v3?location=" + schoolName, ServiceHandler.GET);
                 if (jsonStr != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(jsonStr);
