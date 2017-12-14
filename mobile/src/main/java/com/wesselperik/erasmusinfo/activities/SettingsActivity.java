@@ -12,7 +12,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
-import com.wesselperik.erasmusinfo.MainActivity;
 import com.wesselperik.erasmusinfo.R;
 import com.wesselperik.erasmusinfo.views.TextViewBold;
 
@@ -24,10 +23,10 @@ import butterknife.ButterKnife;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar) private Toolbar toolbar;
-    @BindView(R.id.collapsingtoolbar) private CollapsingToolbarLayout toolbarLayout;
-    @BindView(R.id.appbar) private AppBarLayout appBar;
-    @BindView(R.id.toolbar_content_title) private TextViewBold toolbarContentTitle;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.collapsingtoolbar) CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.appbar) AppBarLayout appBar;
+    @BindView(R.id.toolbar_content_title) TextViewBold toolbarContentTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

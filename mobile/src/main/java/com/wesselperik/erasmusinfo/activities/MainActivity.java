@@ -1,4 +1,4 @@
-package com.wesselperik.erasmusinfo;
+package com.wesselperik.erasmusinfo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.wesselperik.erasmusinfo.activities.AboutActivity;
-import com.wesselperik.erasmusinfo.activities.SettingsActivity;
+import com.wesselperik.erasmusinfo.R;
 
 import com.wesselperik.erasmusinfo.classes.Analytics;
 import com.wesselperik.erasmusinfo.fragments.ChangesFragment;
@@ -29,12 +28,12 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar) private Toolbar toolbar;
-    @BindView(R.id.collapsingtoolbar) private CollapsingToolbarLayout toolbarLayout;
-    @BindView(R.id.appbar) private AppBarLayout appBar;
-    @BindView(R.id.toolbar_title) private TextViewMedium toolbarTitle;
-    @BindView(R.id.toolbar_content_title) private TextViewBold toolbarContentTitle;
-    @BindView(R.id.navigation) private BottomNavigationView bottomNavigation;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.collapsingtoolbar) CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.appbar) AppBarLayout appBar;
+    @BindView(R.id.toolbar_title) TextViewMedium toolbarTitle;
+    @BindView(R.id.toolbar_content_title) TextViewBold toolbarContentTitle;
+    @BindView(R.id.navigation) BottomNavigationView bottomNavigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

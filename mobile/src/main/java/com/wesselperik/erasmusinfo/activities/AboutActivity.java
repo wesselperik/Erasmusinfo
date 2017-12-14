@@ -25,10 +25,10 @@ import butterknife.ButterKnife;
 
 public class AboutActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar) private Toolbar toolbar;
-    @BindView(R.id.collapsingtoolbar) private CollapsingToolbarLayout toolbarLayout;
-    @BindView(R.id.appbar) private AppBarLayout appBar;
-    @BindView(R.id.toolbar_content_title) private TextViewBold toolbarContentTitle;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.collapsingtoolbar) CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.appbar) AppBarLayout appBar;
+    @BindView(R.id.toolbar_content_title) TextViewBold toolbarContentTitle;
 
     @BindView(R.id.text_section1) TextView section1;
     @BindView(R.id.text_section2) TextView section2;

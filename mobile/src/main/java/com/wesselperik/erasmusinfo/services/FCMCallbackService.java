@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.wesselperik.erasmusinfo.MainActivity;
+import com.wesselperik.erasmusinfo.activities.MainActivity;
 import com.wesselperik.erasmusinfo.R;
 
 /**
