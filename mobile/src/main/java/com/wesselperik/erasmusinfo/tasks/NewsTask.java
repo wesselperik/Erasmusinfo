@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
 
-    private NewsAdapter.OnNewsLoaded listener;
+    private NewsAdapter.NewsCallback callback;
 
-    public NewsTask(NewsAdapter.OnNewsLoaded listener) {
-        this.listener = listener;
+    public NewsTask(NewsAdapter.NewsCallback callback) {
+        this.callback = callback;
     }
 
     @Override
@@ -48,7 +48,8 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                     Log.d("News item", news.toString());
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                if (callback != null) callback.onNewsLoadingFailed();
+                // e.printStackTrace();
             }
         } else {
             try {
@@ -64,11 +65,12 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                 items.add(news);
                 Log.d("News single item", news.toString());
             } catch (IOException e) {
-                e.printStackTrace();
+                if (callback != null) callback.onNewsLoadingFailed();
+                // e.printStackTrace();
             }
         }
 
-        if (listener != null) listener.onNewsLoaded(items);
+        if (callback != null && items.size() > 0) callback.onNewsLoaded(items);
         return items;
     }
 }

@@ -68,7 +68,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public interface OnNewsLoaded {
+    public interface NewsCallback {
         void onNewsLoaded(ArrayList<News> items);
+        void onNewsLoadingFailed();
     }
 }

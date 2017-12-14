@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by Wessel on 20-11-2017.
  */
 
-public class NewsFragment extends Fragment implements NewsAdapter.OnNewsLoaded {
+public class NewsFragment extends Fragment implements NewsAdapter.NewsCallback {
 
     private View view;
 
@@ -47,7 +47,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.OnNewsLoaded {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //registerForContextMenu(mRecyclerView);
+        registerForContextMenu(mRecyclerView);
     }
 
     @Override
@@ -82,14 +82,26 @@ public class NewsFragment extends Fragment implements NewsAdapter.OnNewsLoaded {
     }
 
     @Override
-    public void onNewsLoaded(ArrayList<News> items) {
+    public void onNewsLoaded(final ArrayList<News> items) {
         Log.d("NewsFragment", "onNewsLoaded: " + items.size() + " items loaded.");
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                mNewsList = items;
                 mAdapter = new NewsAdapter(getActivity().getApplicationContext(), mNewsList);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setLayoutManager(mLayoutManager);
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void onNewsLoadingFailed() {
+        Log.d("NewsFragment", "onNewsLoadingFailed");
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
                 mProgressBar.setVisibility(View.GONE);
             }
         });
