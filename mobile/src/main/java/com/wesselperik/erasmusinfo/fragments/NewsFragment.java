@@ -1,5 +1,6 @@
 package com.wesselperik.erasmusinfo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.activities.MainActivity;
+import com.wesselperik.erasmusinfo.activities.NewsActivity;
 import com.wesselperik.erasmusinfo.adapters.NewsAdapter;
 import com.wesselperik.erasmusinfo.classes.Constants;
+import com.wesselperik.erasmusinfo.classes.RecyclerItemClickListener;
 import com.wesselperik.erasmusinfo.models.News;
 import com.wesselperik.erasmusinfo.tasks.NewsTask;
 
@@ -67,6 +71,14 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsCallback {
         mAdapter = new NewsAdapter(getActivity().getApplicationContext(), mNewsList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), NewsActivity.class);
+                intent.putExtra("news_item", mNewsList.get(position));
+                startActivity(intent);
+            }
+        }));
         mProgressBar.setVisibility(View.VISIBLE);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(Constants.NEWS)) {
