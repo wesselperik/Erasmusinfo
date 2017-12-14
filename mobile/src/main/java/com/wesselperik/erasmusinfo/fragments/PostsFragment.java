@@ -52,7 +52,6 @@ public class PostsFragment extends Fragment {
     private Gson gson;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-//    @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     private PostAdapter mAdapter;
@@ -90,13 +89,6 @@ public class PostsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
-//        mSwipeRefreshLayout.setColorSchemeResources(R.color.IndigoThemeAccent, R.color.IndigoThemeAccent2, R.color.IndigoThemeAccent3);
-//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                fetchPosts();
-//            }
-//        });
 
         mPostsList = new ArrayList<>();
         mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
@@ -114,11 +106,6 @@ public class PostsFragment extends Fragment {
         }
 
         return view;
-    }
-
-    public void refresh() {
-//        mSwipeRefreshLayout.setRefreshing(true);
-        fetchPosts();
     }
 
     private void fetchPosts() {
@@ -142,14 +129,12 @@ public class PostsFragment extends Fragment {
             Log.i("PostsFragment", posts.size() + " posts loaded.");
             mPostsList = new ArrayList<>();
             for (Post post : posts) {
-                // Log.i("PostsFragment", post.ID + ": " + post.title);
                 mPostsList.add(post);
             }
 
             mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager);
-//            mSwipeRefreshLayout.setRefreshing(false);
             mProgressBar.setVisibility(View.GONE);
         }
     };
@@ -158,7 +143,6 @@ public class PostsFragment extends Fragment {
         @Override
         public void onErrorResponse(VolleyError error) {
             Log.e("PostsFragment", error.toString());
-//            mSwipeRefreshLayout.setRefreshing(false);
         }
     };
 }
