@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.holders.PostHolder;
 import com.wesselperik.erasmusinfo.models.Post;
 
 import java.util.Collections;
@@ -20,13 +21,11 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
     private LayoutInflater inflater;
     List<Post> data = Collections.emptyList();
 
     // create constructor to initialize context and data sent from fragment
     public PostAdapter(Context context, List<Post> data){
-        this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -45,26 +44,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // Get current position of item in recyclerview to bind data and assign values from list
         PostHolder postHolder = (PostHolder) holder;
         Post current = data.get(position);
-        postHolder.title.setText(current.getTitle());
-        postHolder.text.setText(Html.fromHtml(current.getContent()).toString());
+        postHolder.bindViews(current.getTitle(), Html.fromHtml(current.getContent()).toString());
     }
 
     // return total item from List
     @Override
     public int getItemCount() {
         return data.size();
-    }
-
-    class PostHolder extends RecyclerView.ViewHolder{
-
-        TextView title;
-        TextView text;
-
-        // create constructor to get widget reference
-        public PostHolder(View itemView) {
-            super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
-            text = (TextView) itemView.findViewById(R.id.text);
-        }
     }
 }
