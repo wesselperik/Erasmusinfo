@@ -10,9 +10,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.wesselperik.erasmusinfo.R;
 
 import com.wesselperik.erasmusinfo.classes.Analytics;
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
         Analytics analytics = new Analytics(getApplicationContext());
         analytics.init();
+
+        Log.d("Firebase", FirebaseInstanceId.getInstance().getToken());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, PostsFragment.newInstance(), "PostsFragment").commit();
     }

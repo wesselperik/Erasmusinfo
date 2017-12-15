@@ -51,9 +51,4 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return data.size();
     }
-
-    public interface NewsCallback {
-        void onNewsLoaded(ArrayList<News> items);
-        void onNewsLoadingFailed();
-    }
 }

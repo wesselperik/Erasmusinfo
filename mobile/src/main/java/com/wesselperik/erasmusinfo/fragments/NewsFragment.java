@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.wesselperik.erasmusinfo.R;
-import com.wesselperik.erasmusinfo.activities.MainActivity;
 import com.wesselperik.erasmusinfo.activities.NewsActivity;
 import com.wesselperik.erasmusinfo.adapters.NewsAdapter;
 import com.wesselperik.erasmusinfo.classes.Constants;
 import com.wesselperik.erasmusinfo.classes.RecyclerItemClickListener;
+import com.wesselperik.erasmusinfo.interfaces.NewsCallback;
 import com.wesselperik.erasmusinfo.models.News;
 import com.wesselperik.erasmusinfo.tasks.NewsTask;
 
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by Wessel on 20-11-2017.
  */
 
-public class NewsFragment extends Fragment implements NewsAdapter.NewsCallback {
+public class NewsFragment extends Fragment implements NewsCallback {
 
     private View view;
 

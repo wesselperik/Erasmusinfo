@@ -1,6 +1,7 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -145,30 +146,38 @@
                         android:textSize="18dp"
                         android:fontFamily="sans-serif"/>
 
-                    <TextView
-                        android:id="@+id/text_section2"
-                        android:layout_width="fill_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/title_section2"
-                        android:gravity="center_vertical"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textSize="14dp"
-                        android:textColor="@color/darkgrey"
-                        android:text="Beoordeel deze app"
-                        android:fontFamily="sans-serif-light"/>
+                        android:weightSum="100"
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/button_section2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/text_section2"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="Beoordelen"
-                        android:textColor="@color/colorAccent"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:onClick="goToPlayStore"/>
+                        <TextView
+                            android:id="@+id/text_section2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="90"
+                            android:layout_marginTop="5dp"
+                            android:layout_below="@id/title_section2"
+                            android:gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textSize="14dp"
+                            android:textColor="@color/darkgrey"
+                            android:text="Beoordeel deze app"
+                            android:fontFamily="sans-serif-light"/>
+
+                        <ImageButton
+                            android:id="@+id/button_section2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:layout_below="@id/text_section2"
+                            android:src="@drawable/ic_review"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:onClick="goToPlayStore"
+                            tools:targetApi="lollipop" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -249,30 +258,38 @@
                         android:textSize="18dp"
                         android:fontFamily="sans-serif"/>
 
-                    <TextView
-                        android:id="@+id/text_section4"
-                        android:layout_width="fill_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/title_section4"
-                        android:gravity="center_vertical"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textSize="14dp"
-                        android:textColor="@color/darkgrey"
-                        android:text="Contact"
-                        android:fontFamily="sans-serif-light"/>
+                        android:weightSum="100"
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/button_section4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/text_section4"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="Stuur een e-mail"
-                        android:textColor="@color/colorAccent"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:onClick="mailDeveloper"/>
+                        <TextView
+                            android:id="@+id/text_section4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="90"
+                            android:layout_marginTop="5dp"
+                            android:layout_below="@id/title_section4"
+                            android:gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textSize="14dp"
+                            android:textColor="@color/darkgrey"
+                            android:text="Contact"
+                            android:fontFamily="sans-serif-light"/>
+
+                        <ImageButton
+                            android:id="@+id/button_section4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:layout_below="@id/text_section4"
+                            android:src="@drawable/ic_mail"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:onClick="mailDeveloper"
+                            tools:targetApi="lollipop" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

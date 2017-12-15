@@ -29,6 +29,16 @@ public class News implements Parcelable {
         this.image = "";
     }
 
+    public News(String title, String shortText, String text, String category, String date, String url, String image) {
+        this.title = title;
+        this.shortText = shortText;
+        this.text = text;
+        this.category = category;
+        this.date = date;
+        this.url = url;
+        this.image = image;
+    }
+
     private News(Parcel in) {
         title = in.readString();
         shortText = in.readString();

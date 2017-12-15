@@ -3,7 +3,7 @@ package com.wesselperik.erasmusinfo.tasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.wesselperik.erasmusinfo.adapters.NewsAdapter;
+import com.wesselperik.erasmusinfo.interfaces.NewsCallback;
 import com.wesselperik.erasmusinfo.models.News;
 
 import org.jsoup.Jsoup;
@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
 
-    private NewsAdapter.NewsCallback callback;
+    private NewsCallback callback;
 
-    public NewsTask(NewsAdapter.NewsCallback callback) {
+    public NewsTask(NewsCallback callback) {
         this.callback = callback;
     }
 
@@ -60,6 +60,7 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                 String shortText = item.getElementsByTag("h2").get(0).getElementsByClass("bodytext").get(0).text();
                 String category = item.getElementsByClass("news-list-category").get(0).text();
                 String date = item.getElementsByClass("news-single-date").get(0).text().replace(".", " ");
+
                 String text = "";
                 int count = item.getElementsByTag("p").size();
                 Log.d("DetailFragment", "count texts: " + count);
@@ -67,9 +68,11 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                     text += item.getElementsByTag("p").get(i).text();
                     if (i < count - 1) text += "\n";
                 }
+
                 String url = item.baseUri();
-                News news = new News(title, shortText, category, date, url);
-                news.text = text;
+                String image = "https://het-erasmus.nl/" + item.getElementsByClass("news-single-img").get(0).getElementsByTag("img").get(0).attr("src");
+
+                News news = new News(title, shortText, text, category, date, url, image);
                 items.add(news);
                 Log.d("News single item", news.toString());
             } catch (IOException e) {
