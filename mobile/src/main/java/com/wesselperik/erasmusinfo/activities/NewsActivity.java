@@ -9,36 +9,48 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.R;
+import com.wesselperik.erasmusinfo.adapters.NewsAdapter;
 import com.wesselperik.erasmusinfo.models.News;
+import com.wesselperik.erasmusinfo.tasks.NewsTask;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewsActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.collapsingtoolbar) CollapsingToolbarLayout toolbarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_news);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbarLayout.setTitle(" ");
 
         getFragmentManager().beginTransaction().replace(R.id.container, new DetailFragment()).commit();
     }
@@ -72,13 +84,14 @@ public class NewsActivity extends AppCompatActivity {
         }
     }
 
-    public static class DetailFragment extends Fragment {
+    public static class DetailFragment extends Fragment implements NewsAdapter.NewsCallback {
 
         @BindView(R.id.title) TextView title;
         @BindView(R.id.date) TextView date;
         @BindView(R.id.category) TextView category;
         @BindView(R.id.header) TextView header;
         @BindView(R.id.text) TextView text;
+        @BindView(R.id.progressBarLayout) LinearLayout progressBarLayout;
 
         public static DetailFragment newInstance() {
             DetailFragment fragment = new DetailFragment();
@@ -106,6 +119,8 @@ public class NewsActivity extends AppCompatActivity {
             header.setText(newsItem.getShortText());
             text.setText(newsItem.getText());
 
+            new NewsTask(this).execute(newsItem.getUrl());
+
             return rootView;
         }
 
@@ -119,5 +134,32 @@ public class NewsActivity extends AppCompatActivity {
             super.onAttach(activity);
         }
 
+        @Override
+        public void onNewsLoaded(final ArrayList<News> items) {
+            Log.d("DetailFragment", "onNewsLoaded: " + items.size() + " items loaded.");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    News newsItem = items.get(0);
+                    title.setText(newsItem.getTitle());
+                    date.setText(newsItem.getDate());
+                    category.setText(newsItem.getCategory());
+                    header.setText(newsItem.getShortText());
+                    text.setText(newsItem.getText());
+                    progressBarLayout.setVisibility(View.GONE);
+                }
+            });
+        }
+
+        @Override
+        public void onNewsLoadingFailed() {
+            Log.d("DetailFragment", "onNewsLoadingFailed");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBarLayout.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 }

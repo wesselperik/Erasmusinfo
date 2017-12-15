@@ -60,8 +60,16 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                 String shortText = item.getElementsByTag("h2").get(0).getElementsByClass("bodytext").get(0).text();
                 String category = item.getElementsByClass("news-list-category").get(0).text();
                 String date = item.getElementsByClass("news-single-date").get(0).text().replace(".", " ");
+                String text = "";
+                int count = item.getElementsByTag("p").size();
+                Log.d("DetailFragment", "count texts: " + count);
+                for (int i = 1; i < count; i++) {
+                    text += item.getElementsByTag("p").get(i).text();
+                    if (i < count - 1) text += "\n";
+                }
                 String url = item.baseUri();
                 News news = new News(title, shortText, category, date, url);
+                news.text = text;
                 items.add(news);
                 Log.d("News single item", news.toString());
             } catch (IOException e) {
