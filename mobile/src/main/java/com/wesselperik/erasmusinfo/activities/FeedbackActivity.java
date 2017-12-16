@@ -65,6 +65,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     public void sendEmail(String body) {
         StringBuilder finalBody = new StringBuilder(body);
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Erasmusinfo feedback");
 
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@wesselperik.com"});
