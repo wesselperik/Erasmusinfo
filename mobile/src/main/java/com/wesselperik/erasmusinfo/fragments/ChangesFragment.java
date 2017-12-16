@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -56,6 +59,9 @@ public class ChangesFragment extends Fragment {
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.error_card) CardView mErrorCard;
+    @BindView(R.id.error_text) TextView mErrorText;
+    @BindView(R.id.error_image) ImageView mErrorImage;
 
     private ChangeAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -114,9 +120,16 @@ public class ChangesFragment extends Fragment {
     private void fetchChanges() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String location = prefs.getString("settings_schoolname", "havovwo");
+        Log.d("fetchChanges", "Fetching changes from " + Constants.API_URL + "?" + Constants.API_PARAMETER_LOCATION + "=" + location);
         StringRequest request = new StringRequest(Request.Method.GET, Constants.API_URL + "?" + Constants.API_PARAMETER_LOCATION + "=" + location, onChangesLoaded, onChangesError);
         request.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
+    }
+
+    private void setErrorView(String error, int drawable) {
+        mErrorText.setText(error);
+        mErrorImage.setImageDrawable(getResources().getDrawable(drawable));
+        mErrorCard.setVisibility(View.VISIBLE);
     }
 
     private final Response.Listener<String> onChangesLoaded = new Response.Listener<String>() {
@@ -130,30 +143,35 @@ public class ChangesFragment extends Fragment {
             List<Change> changes = (List<Change>) gson.fromJson(changesArray, listType);
 
             Log.i("ChangesFragment", changes.size() + " changes loaded.");
-            mChangesList = new ArrayList<>();
 
-            int i = 0;
-            for (Change change : changes) {
-                JsonObject item = (JsonObject) element.getAsJsonArray(Constants.CHANGES).get(i);
-                JsonArray changeItemsArray = item.getAsJsonArray(Constants.CHANGE_ITEMS);
+            if (changes.size() > 0) {
+                mChangesList = new ArrayList<>();
 
-                change.changes = new ArrayList<>();
-                for (int j = 0; j < changeItemsArray.size(); j++) {
-                    // ChangeItem changeItem = gson.fromJson(changeItemsArray.get(j).getAsJsonObject().toString(), ChangeItem.class);
-                    ChangeItem changeItem = new ChangeItem(changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_CLASS).getAsString(),
-                            changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_HOUR).getAsString(),
-                            changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_TEACHER).getAsString(),
-                            changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_COMMENT).getAsString());
-                    change.changes.add(changeItem);
+                int i = 0;
+                for (Change change : changes) {
+                    JsonObject item = (JsonObject) element.getAsJsonArray(Constants.CHANGES).get(i);
+                    JsonArray changeItemsArray = item.getAsJsonArray(Constants.CHANGE_ITEMS);
+
+                    change.changes = new ArrayList<>();
+                    for (int j = 0; j < changeItemsArray.size(); j++) {
+                        // ChangeItem changeItem = gson.fromJson(changeItemsArray.get(j).getAsJsonObject().toString(), ChangeItem.class);
+                        ChangeItem changeItem = new ChangeItem(changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_CLASS).getAsString(),
+                                changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_HOUR).getAsString(),
+                                changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_TEACHER).getAsString(),
+                                changeItemsArray.get(j).getAsJsonObject().get(Constants.CHANGE_ITEM_COMMENT).getAsString());
+                        change.changes.add(changeItem);
+                    }
+
+                    mChangesList.add(change);
+                    i++;
                 }
 
-                mChangesList.add(change);
-                i++;
+                mAdapter = new ChangeAdapter(getActivity().getApplicationContext(), mChangesList);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+            } else {
+                setErrorView(getString(R.string.error_no_changes), R.drawable.ic_error_changes);
             }
-
-            mAdapter = new ChangeAdapter(getActivity().getApplicationContext(), mChangesList);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(mLayoutManager);
             mProgressBar.setVisibility(View.GONE);
         }
     };
@@ -161,6 +179,7 @@ public class ChangesFragment extends Fragment {
     private final Response.ErrorListener onChangesError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
+            setErrorView(getString(R.string.error_no_internet), R.drawable.ic_error);
             Log.e("ChangesFragment", error.toString());
         }
     };

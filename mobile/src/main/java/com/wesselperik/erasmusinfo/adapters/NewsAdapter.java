@@ -21,19 +21,21 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater;
-    List<News> data = Collections.emptyList();
+    private List<News> data = Collections.emptyList();
+    private Context context;
 
     // create constructor to initialize context and data sent from fragment
     public NewsAdapter(Context context, List<News> data){
         inflater = LayoutInflater.from(context);
         this.data = data;
+        this.context = context;
     }
 
     // Inflate the layout when viewholder created
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_news, parent,false);
-        return new NewsHolder(view);
+        return new NewsHolder(view, context);
     }
 
     // Bind data
@@ -43,7 +45,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // Get current position of item in recyclerview to bind data and assign values from list
         NewsHolder newsHolder = (NewsHolder) holder;
         News current = data.get(position);
-        newsHolder.bindViews(current.getTitle(), current.getShortText());
+        newsHolder.bindViews(current.getTitle(), current.getImage());
     }
 
     // return total item from List

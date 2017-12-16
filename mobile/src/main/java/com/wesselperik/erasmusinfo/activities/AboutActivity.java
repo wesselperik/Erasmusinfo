@@ -117,8 +117,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void mailDeveloper(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("mailto:info@wesselperik.com?Subject=Erasmusinfo Android App"));
+        Intent intent = new Intent(getApplicationContext(), FeedbackActivity.class);
         startActivity(intent);
     }
 }

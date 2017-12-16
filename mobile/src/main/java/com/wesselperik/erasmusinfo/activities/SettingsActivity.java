@@ -2,9 +2,11 @@ package com.wesselperik.erasmusinfo.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static class PrefsFragment extends PreferenceFragmentCompat {
 
         public PrefsFragment() {
+            // empty constructor
         }
 
         @Override
@@ -73,9 +76,13 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.preferences);
 
             final Preference schoolPreference = findPreference("settings_schoolname");
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            String location = prefs.getString("settings_schoolname", "havovwo");
+            schoolPreference.setSummary(getLocationString(location));
             schoolPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    schoolPreference.setSummary(getLocationString((String) newValue));
                     restartMain(getActivity());
                     return true;
                 }
@@ -94,20 +101,19 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-            /*final Preference notificationsPreference = findPreference("settings_notifications");
-            notificationsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            final Preference feedbackPreference = findPreference("info_feedback");
+            feedbackPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick (Preference preference) {
-                    //Intent i = new Intent(getActivity().getApplicationContext(), NotificationsActivity.class);
-                    //startActivity(i);
-
+                    Intent intent = new Intent(getActivity().getApplicationContext(), FeedbackActivity.class);
+                    startActivity(intent);
                     return true;
                 }
-            });*/
+            });
 
             final Preference versionInfo = findPreference("info_version");
             try {
-                versionInfo.setSummary(appVersion());
+                versionInfo.setSummary(getAppVersion());
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -116,8 +122,6 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
-
-            getView().setClickable(true);
         }
 
         @Override
@@ -125,10 +129,23 @@ public class SettingsActivity extends AppCompatActivity {
             super.onAttach(activity);
         }
 
-        public String appVersion() throws PackageManager.NameNotFoundException {
+        public String getAppVersion() throws PackageManager.NameNotFoundException {
             PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-            String version = "v" + pInfo.versionName + " (build " + pInfo.versionCode + ")";
-            return version;
+            return "v" + pInfo.versionName + " (build " + pInfo.versionCode + ")";
+        }
+
+        public String getLocationString(String setting) {
+            String locationString = "";
+            if (setting.equals("havovwo")) {
+                locationString = getString(R.string.havovwo);
+            } else if (setting.equals("vmbo")) {
+                locationString = getString(R.string.vmbo);
+            } else if (setting.equals("pro")) {
+                locationString = getString(R.string.pro);
+            } else if (setting.equals("isk")) {
+                locationString = getString(R.string.isk);
+            }
+            return locationString;
         }
 
     }

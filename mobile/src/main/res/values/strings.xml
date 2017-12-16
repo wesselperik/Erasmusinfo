@@ -13,14 +13,30 @@
     <string name="about_ps">Bekijk in Google Play</string>
     <string name="add_notification">Notificatie toevoegen</string>
 
+    <string name="text_send_feedback">Feedback verzenden</string>
+    <string name="text_feedback_input">Deel hier je feedback…</string>
+    <string name="text_select_image">Screenshot selecteren</string>
+
     <string name="error_no_internet">Geen internetverbinding</string>
+    <string name="error_no_posts">Geen mededelingen</string>
+    <string name="error_no_changes">Geen roosterwijzigingen</string>
+    <string name="error_no_news">Geen nieuws</string>
     <string name="error_unknown">Er is een fout opgetreden. Probeer het later nog eens. Als deze fout blijft verschijnen, neem contact op met de ontwikkelaar.</string>
+    <string name="error_allow_sd_access">Geef toegang tot de telefoonopslag om een screenshot bij te voegen.</string>
+    <string name="error_no_feedback_provided">Je hebt dit veld niet ingevuld…</string>
+
+    <string name="dialog_negative_button">Annuleren</string>
+    <string name="dialog_positive_button">OK</string>
+
+    <string name="intent_feedback_header">Feedback verzenden via…</string>
+    <string name="intent_select_image_header">Selecteer een afbeelding…</string>
 
     <string name="close">Sluiten</string>
 
     <string name="havovwo">HAVO/VWO</string>
     <string name="vmbo">VMBO</string>
-    <string name="pro">PrO</string>
+    <string name="pro">Pro</string>
+    <string name="isk">ISK</string>
 
     <string name="navigation_drawer_open">Menu openen</string>
     <string name="navigation_drawer_close">Menu sluiten</string>

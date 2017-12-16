@@ -3,13 +3,16 @@ package com.wesselperik.erasmusinfo.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.wesselperik.erasmusinfo.R;
 import com.wesselperik.erasmusinfo.activities.NewsActivity;
@@ -36,6 +39,9 @@ public class NewsFragment extends Fragment implements NewsCallback {
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.error_card) CardView mErrorCard;
+    @BindView(R.id.error_text) TextView mErrorText;
+    @BindView(R.id.error_image) ImageView mErrorImage;
 
     private NewsAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -93,16 +99,26 @@ public class NewsFragment extends Fragment implements NewsCallback {
         return view;
     }
 
+    private void setErrorView(String error, int drawable) {
+        mErrorText.setText(error);
+        mErrorImage.setImageDrawable(getResources().getDrawable(drawable));
+        mErrorCard.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onNewsLoaded(final ArrayList<News> items) {
         Log.d("NewsFragment", "onNewsLoaded: " + items.size() + " items loaded.");
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mNewsList = items;
-                mAdapter = new NewsAdapter(getActivity().getApplicationContext(), mNewsList);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setLayoutManager(mLayoutManager);
+                if (items.size() > 0) {
+                    mNewsList = items;
+                    mAdapter = new NewsAdapter(getActivity().getApplicationContext(), mNewsList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                } else {
+                    setErrorView(getString(R.string.error_no_news), R.drawable.ic_error);
+                }
                 mProgressBar.setVisibility(View.GONE);
             }
         });
@@ -114,6 +130,7 @@ public class NewsFragment extends Fragment implements NewsCallback {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                setErrorView(getString(R.string.error_no_internet), R.drawable.ic_error);
                 mProgressBar.setVisibility(View.GONE);
             }
         });

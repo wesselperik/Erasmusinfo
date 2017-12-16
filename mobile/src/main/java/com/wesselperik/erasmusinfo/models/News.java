@@ -19,14 +19,14 @@ public class News implements Parcelable {
     public String url;
     public String image;
 
-    public News(String title, String shortText, String category, String date, String url) {
+    public News(String title, String shortText, String category, String date, String url, String image) {
         this.title = title;
         this.shortText = shortText;
         this.text = "";
         this.category = category;
         this.date = date;
         this.url = url;
-        this.image = "";
+        this.image = image;
     }
 
     public News(String title, String shortText, String text, String category, String date, String url, String image) {

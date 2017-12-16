@@ -60,7 +60,7 @@ public class NewsActivity extends AppCompatActivity implements NewsDetailCallbac
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.nieuws_detail, menu);
+        getMenuInflater().inflate(R.menu.detail, menu);
 
         return super.onCreateOptionsMenu(menu);
     }

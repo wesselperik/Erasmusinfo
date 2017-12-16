@@ -25,6 +25,9 @@
         android:title="Informatie"
         android:key="aboutCategory">
         <Preference
+            android:title="Feedback versturen"
+            android:key="info_feedback"/>
+        <Preference
             android:title="App-versie"
             android:summary=""
             android:key="info_version"

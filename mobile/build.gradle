@@ -60,11 +60,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'org.jsoup:jsoup:1.11.2'
 
-    // Local third-party dependencies
-    compile files('libs/json-simple-1.1.1.jar')
-    compile files('libs/commons-lang3-3.4.jar')
-    compile files('libs/org.apache.http.legacy.jar')
-
     // Set Butterknife as annotation processor
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 

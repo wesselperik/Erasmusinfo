@@ -252,7 +252,7 @@
                         android:id="@+id/title_section4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contact"
+                        android:text="Contact/feedback"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@android:color/black"
                         android:textSize="18dp"

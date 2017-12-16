@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -53,6 +56,9 @@ public class PostsFragment extends Fragment {
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.error_card) CardView mErrorCard;
+    @BindView(R.id.error_text) TextView mErrorText;
+    @BindView(R.id.error_image) ImageView mErrorImage;
 
     private PostAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -95,6 +101,7 @@ public class PostsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mProgressBar.setVisibility(View.VISIBLE);
+        mErrorCard.setVisibility(View.INVISIBLE);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(Constants.POSTS)) {
             // Get posts from saved instance state
@@ -111,15 +118,22 @@ public class PostsFragment extends Fragment {
     private void fetchPosts() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String location = prefs.getString("settings_schoolname", "havovwo");
+        Log.d("fetchPosts", "Fetching posts from " + Constants.API_URL + "?" + Constants.API_PARAMETER_LOCATION + "=" + location);
         StringRequest request = new StringRequest(Request.Method.GET, Constants.API_URL + "?" + Constants.API_PARAMETER_LOCATION + "=" + location, onPostsLoaded, onPostsError);
         request.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }
 
+    private void setErrorView(String error, int drawable) {
+        mErrorText.setText(error);
+        mErrorImage.setImageDrawable(getResources().getDrawable(drawable));
+        mErrorCard.setVisibility(View.VISIBLE);
+    }
+
     private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-        JsonParser parser = new JsonParser();
+            JsonParser parser = new JsonParser();
             JsonObject element = (JsonObject) parser.parse(response);
 
             JsonArray postsArray = element.getAsJsonArray(Constants.POSTS);
@@ -127,14 +141,19 @@ public class PostsFragment extends Fragment {
             List<Post> posts = (List<Post>) gson.fromJson(postsArray, listType);
 
             Log.i("PostsFragment", posts.size() + " posts loaded.");
-            mPostsList = new ArrayList<>();
-            for (Post post : posts) {
-                mPostsList.add(post);
-            }
 
-            mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(mLayoutManager);
+            if (posts.size() > 0) {
+                mPostsList = new ArrayList<>();
+                for (Post post : posts) {
+                    mPostsList.add(post);
+                }
+
+                mAdapter = new PostAdapter(getActivity().getApplicationContext(), mPostsList);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+            } else {
+                setErrorView(getString(R.string.error_no_posts), R.drawable.ic_error_posts);
+            }
             mProgressBar.setVisibility(View.GONE);
         }
     };
@@ -142,6 +161,7 @@ public class PostsFragment extends Fragment {
     private final Response.ErrorListener onPostsError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
+            setErrorView(getString(R.string.error_no_internet), R.drawable.ic_error);
             Log.e("PostsFragment", error.toString());
         }
     };

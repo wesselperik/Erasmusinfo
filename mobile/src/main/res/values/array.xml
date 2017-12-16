@@ -3,11 +3,13 @@
     <string-array name="schoolArray">
         <item>HAVO/VWO</item>
         <item>VMBO</item>
-        <item>PrO</item>
+        <item>Pro</item>
+        <item>ISK</item>
     </string-array>
     <string-array name="schoolValues">
         <item>havovwo</item>
         <item>vmbo</item>
         <item>pro</item>
+        <item>isk</item>
     </string-array>
 </resources>

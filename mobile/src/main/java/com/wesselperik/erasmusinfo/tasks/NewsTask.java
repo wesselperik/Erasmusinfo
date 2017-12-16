@@ -43,7 +43,8 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                     String category = item.getElementsByTag("a").get(0).text();
                     String date = item.getElementsByClass("news-list-date").get(0).text().replace(".", " ");
                     String url = item.getElementsByTag("a").get(0).attr("href");
-                    News news = new News(title, shortText, category, date, url);
+                    String image = "https://het-erasmus.nl/" + newsItem.getElementsByClass("news-list-item-left").get(0).getElementsByTag("img").get(0).attr("src");
+                    News news = new News(title, shortText, category, date, url, image);
                     items.add(news);
                     Log.d("News item", news.toString());
                 }
