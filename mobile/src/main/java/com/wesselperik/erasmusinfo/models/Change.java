@@ -23,7 +23,7 @@ public class Change implements Parcelable {
         ID = in.readLong();
         title = in.readString();
         changes = new ArrayList<ChangeItem>();
-        in.readList(changes, null);
+        in.readList(changes, getClass().getClassLoader());
     }
 
     public long getId() {
