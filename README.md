@@ -2,8 +2,6 @@
 
 Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](https://www.het-erasmus.nl/) op je telefoon of Android Wear-horloge met de Erasmusinfo app!
 
-[![Download](https://erasmusinfo.nl/img/google-play.png)](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo)
-
 ---
 
 :white_check_mark: **Huidige versie:** 4.0 (build 31)
@@ -13,3 +11,7 @@ Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](
 :earth_africa: **Website:** [erasmusinfo.nl](https://erasmusinfo.nl/)
 
 :key: **API:** [api.erasmusinfo.nl](https://api.erasmusinfo.nl/)
+
+---
+
+[![Download](https://erasmusinfo.nl/img/google-play.png)](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo)
