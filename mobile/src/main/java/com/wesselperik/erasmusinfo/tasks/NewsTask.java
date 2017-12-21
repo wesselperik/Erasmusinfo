@@ -59,7 +59,10 @@ public class NewsTask extends AsyncTask<String, Void, ArrayList<News>> {
                 Element item = doc.getElementsByClass("news-single-item").get(0);
                 String title = item.getElementsByTag("h1").get(0).text();
                 String shortText = item.getElementsByTag("h2").get(0).getElementsByClass("bodytext").get(0).text();
-                String category = item.getElementsByClass("news-list-category").get(0).text();
+                String category = "";
+                if (item.getElementsByClass("news-list-category").size() > 0) {
+                    category = item.getElementsByClass("news-list-category").get(0).text();
+                }
                 String date = item.getElementsByClass("news-single-date").get(0).text().replace(".", " ");
 
                 String text = "";

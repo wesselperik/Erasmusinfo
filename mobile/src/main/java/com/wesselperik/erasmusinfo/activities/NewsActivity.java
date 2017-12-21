@@ -97,6 +97,7 @@ public class NewsActivity extends AppCompatActivity implements NewsDetailCallbac
         @BindView(R.id.title) TextView title;
         @BindView(R.id.date) TextView date;
         @BindView(R.id.category) TextView category;
+        @BindView(R.id.categoryImage) ImageView categoryImage;
         @BindView(R.id.header) TextView header;
         @BindView(R.id.text) TextView text;
         @BindView(R.id.progressBarLayout) LinearLayout progressBarLayout;
@@ -121,7 +122,12 @@ public class NewsActivity extends AppCompatActivity implements NewsDetailCallbac
 
             title.setText(newsItem.getTitle());
             date.setText(newsItem.getDate());
-            category.setText(newsItem.getCategory());
+            if (newsItem.getCategory().equals("")) {
+                category.setVisibility(View.GONE);
+                categoryImage.setVisibility(View.GONE);
+            } else {
+                category.setText(newsItem.getCategory());
+            }
             header.setText(newsItem.getShortText());
             text.setText(newsItem.getText());
 
