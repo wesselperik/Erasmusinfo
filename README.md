@@ -4,9 +4,9 @@ Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](
 
 ---
 
-:white_check_mark: **Huidige versie:** 4.0 (build 31)
+:white_check_mark: **Huidige versie:** 4.0.1 (build 32)
 
-:clock8: **Bijgewerkt op:** 15 december 2017
+:clock8: **Bijgewerkt op:** 21 december 2017
 
 :earth_africa: **Website:** [erasmusinfo.nl](https://erasmusinfo.nl/)
 
