@@ -142,6 +142,10 @@ public class ChangesFragment extends Fragment {
             Type listType = new TypeToken<List<Change>>(){}.getType();
             List<Change> changes = (List<Change>) gson.fromJson(changesArray, listType);
 
+            if (changes == null) {
+                changes = new ArrayList<>();
+            }
+
             Log.i("ChangesFragment", changes.size() + " changes loaded.");
 
             if (changes.size() > 0) {

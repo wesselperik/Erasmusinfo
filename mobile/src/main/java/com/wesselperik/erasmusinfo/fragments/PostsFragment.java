@@ -140,6 +140,10 @@ public class PostsFragment extends Fragment {
             Type listType = new TypeToken<List<Post>>(){}.getType();
             List<Post> posts = (List<Post>) gson.fromJson(postsArray, listType);
 
+            if (posts == null) {
+                posts = new ArrayList<>();
+            }
+
             Log.i("PostsFragment", posts.size() + " posts loaded.");
 
             if (posts.size() > 0) {
