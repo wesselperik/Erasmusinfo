@@ -1,0 +1,57 @@
+{
+  "project_info": {
+    "project_number": "185934442442",
+    "firebase_url": "https://erasmusinfo-android.firebaseio.com",
+    "project_id": "erasmusinfo-android",
+    "storage_bucket": "erasmusinfo-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185934442442:android:ffa54df2b4ad6478",
+        "android_client_info": {
+          "package_name": "com.wesselperik.erasmusinfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185934442442-oafc6pnccgo05cs15dov9v9mja1d2v10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wesselperik.erasmusinfo",
+            "certificate_hash": "0B720CE22FE9DCDA2D64036A62DE4A07DE718E6B"
+          }
+        },
+        {
+          "client_id": "185934442442-330mqqjr8akqfe1c433rnkd7bk4uunoa.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "185934442442-dkul0ded81mgi243ep0g3c9313g4kplr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLC4TVB7kbdAXUfu7QjD_5uCTFyTXWOx8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-56228645-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
