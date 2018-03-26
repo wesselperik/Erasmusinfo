@@ -15,7 +15,7 @@ Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](
 
 ## Download
 
-Download de app via [Google Play](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo) of download [de laatste debug-APK](http://jenkins.perik.me/job/Erasmusinfo/lastSuccessfulBuild/artifact/app/build/outputs/apk/debug/app-debug.apk).
+Download de app via [Google Play](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo) of download [de laatste debug-APK](http://jenkins.perik.me/job/Erasmusinfo/6/artifact/mobile/build/outputs/apk/debug/mobile-debug.apk).
 
 ## License
 
