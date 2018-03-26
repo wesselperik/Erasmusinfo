@@ -135,7 +135,7 @@ public class ChangesFragment extends Fragment {
     private final Response.Listener<String> onChangesLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-        JsonParser parser = new JsonParser();
+            JsonParser parser = new JsonParser();
             JsonObject element = (JsonObject) parser.parse(response);
 
             JsonArray changesArray = element.getAsJsonArray(Constants.CHANGES);
