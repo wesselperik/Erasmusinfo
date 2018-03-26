@@ -1,6 +1,6 @@
 ![Erasmusinfo](https://erasmusinfo.nl/img/Erasmusinfo-logo-text-v5.png)
 
-Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](https://www.het-erasmus.nl/) op je telefoon of Android Wear-horloge met de Erasmusinfo app!
+Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](https://www.het-erasmus.nl/) met de Erasmusinfo app!
 
 ---
 
