@@ -3,6 +3,7 @@
 Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](https://www.het-erasmus.nl/) met de Erasmusinfo app!
 
 ---
+:warning:	**Build status:** [![Build Status](http://jenkins.perik.me/job/Erasmusinfo/badge/icon)](http://jenkins.perik.me/job/Erasmusinfo/)
 
 :white_check_mark: **Huidige versie:** 4.0.1 (build 32)
 
@@ -12,11 +13,9 @@ Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](
 
 :key: **API:** [api.erasmusinfo.nl](https://api.erasmusinfo.nl/)
 
----
+## Download
 
 [![Download](https://erasmusinfo.nl/img/google-play.png)](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo)
-
----
 
 ## License
 
