@@ -1,0 +1,21 @@
+update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Deploy a new beta build to the Google Play Store"
+  lane :beta do
+    gradle(task: 'assemble', build_type: 'Release')
+    upload_to_play_store(track: 'beta')
+    slack(
+       message: "Beta build succesfully released on Google Play Store",
+       success: true,
+       slack_url: "https://hooks.slack.com/services/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"
+   )
+  end
+end

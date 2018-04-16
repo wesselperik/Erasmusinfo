@@ -1,0 +1,20 @@
+De Erasmusinfo app is gemaakt om gemakkelijk roosterwijzigingen en mededelingen van Het Erasmus te bekijken. Dit is een onofficiële app en dus niet erkend door Het Erasmus. De app is gemaakt door Wessel Perik, een oud-leerling van Het Erasmus.
+
+Features:
+
+  • Bekijk roosterwijzigingen en mededelingen van jouw school in één handig overzicht
+  • Bekijk het nieuws van alle vestigingen
+  • Bekijk het infokanaal op je Android Wear-smartwatch
+
+
+Ik wil alle beta-testers hartelijk bedanken voor hun goede bijdrage aan de app, zonder hun feedback was de app niet op het punt gekomen waar hij nu is!
+
+
+
+
+DISCLAIMER
+
+De informatie van het Infokanaal-gedeelte in deze app komt direct van de infokanalen van Het Erasmus, deze zijn in geen enkele vorm gewijzigd.
+De Erasmusinfo app is GEEN officiële app van Het Erasmus, maar een app gemaakt door een oud-leerling.
+
+Erasmusinfo website: http://erasmusinfo.nl

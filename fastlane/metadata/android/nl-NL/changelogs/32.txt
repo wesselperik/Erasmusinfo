@@ -1,0 +1,3 @@
+In deze update zijn er een paar bugs gefixt, welke er onder andere voor zorgden dat bij het openen van bepaalde nieuwsartikelen de app crashte.
+
+Heb je vragen en/of opmerkingen naar aanleiding van deze update? Klik in de app op de knop 'Feedback versturen' onder de instellingen om je feedback te delen!

@@ -1,0 +1,4 @@
+De Erasmusinfo app is volledig vernieuwd! Met een nieuwe overzichtelijke interface en een roosterwijzigingen-overzicht (naast de mededelingen) maken we een frisse start, maar ook keert het nieuwsoverzicht terug!
+Ook is locatie ISK toegevoegd, en zijn er een tal van bugfixes toegepast.
+
+Veel plezier met deze nieuwe versie! Mocht je feedback hebben naar aanleiding van deze versie, klik in de app dan op de knop 'Feedback versturen' onder de instellingen.

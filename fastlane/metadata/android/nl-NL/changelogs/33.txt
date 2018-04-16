@@ -1,0 +1,3 @@
+In deze update is er een bug gefixt welke er voor zorgde dat de app bij sommige gebruikers bij het laden van roosterwijzigingen crashte.
+
+Heb je vragen en/of opmerkingen naar aanleiding van deze update? Klik in de app op de knop 'Feedback versturen' onder de instellingen om je feedback te delen!

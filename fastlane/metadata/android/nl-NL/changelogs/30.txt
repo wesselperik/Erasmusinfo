@@ -1,0 +1,2 @@
+- Stabiliteits- en bugfixes
+- Veranderen van vestiging gaat nu direct, zonder de app te herstarten
