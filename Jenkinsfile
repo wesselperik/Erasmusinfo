@@ -1,8 +1,8 @@
 node('master') {
     stage('Checkout') {
         echo 'Getting source code...'
-        sh "git checkout alpha $WORKSPACE"
         sh "cd $WORKSPACE"
+        sh "git checkout alpha"
         sh "git pull"
     }
 
