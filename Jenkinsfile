@@ -7,8 +7,11 @@ node('master') {
     }
 
     stage('Running Fastlane') {
-        echo 'Running Fastlane alpha lane...'
-        sh 'bundle exec fastlane alpha'
+        when { expression { sh([returnStdout: true, script: 'echo $TAG_NAME | tr -d \'\n\'']) } }
+        steps {
+            echo 'Running Fastlane alpha lane...'
+            sh 'bundle exec fastlane alpha'
+        }
     }
     
     stage('Archiving artifacts') {
