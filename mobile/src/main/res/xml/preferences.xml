@@ -10,11 +10,6 @@
             android:defaultValue="havovwo"
             android:entries="@array/schoolArray"
             android:entryValues="@array/schoolValues" />
-        <SwitchPreference
-            android:title="Wear service"
-            android:summary="Schakel de Android Wear service in als je mededelingen op je smartwatch wilt bekijken"
-            android:key="settings_wear_service"
-            android:defaultValue="false" />
         <!--<Preference
             android:title="Notificaties"
             android:summary="Beheer je notificaties"
