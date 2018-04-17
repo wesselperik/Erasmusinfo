@@ -8,6 +8,15 @@ platform :android do
     gradle(task: "test")
   end
 
+  desc "Deploy a new production build to the Google Play Store"
+  lane :beta do
+    begin
+      build_deploy_production()
+    rescue => exception
+      on_error(exception)
+    end
+  end
+
   desc "Deploy a new beta build to the Google Play Store"
   lane :beta do
     begin
@@ -15,8 +24,39 @@ platform :android do
     rescue => exception
       on_error(exception)
     end
-    
   end
+
+  desc "Deploy a new alpha build to the Google Play Store"
+  lane :beta do
+    begin
+      build_deploy_alpha()
+    rescue => exception
+      on_error(exception)
+    end
+  end
+end
+
+def build_deploy_production
+  gradle(
+    task: 'assemble',
+    build_type: 'Release',
+    print_command: false, 
+    properties: {     
+        "android.injected.signing.store.file" => "fastlane/android.jks",
+        "android.injected.signing.store.password" => ENV['KEYSTORE_PASSWORD'],     
+        "android.injected.signing.key.alias" => ENV['KEYSTORE_ALIAS'],
+        "android.injected.signing.key.password" => ENV['KEYSTORE_ALIAS_PASSWORD'], 
+    }
+  )
+  apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+  upload_to_play_store(
+    apk: apk_path
+  )
+  slack(
+    message: "Production build succesfully released on Google Play Store",
+    success: true,
+    slack_url: "https://hooks.slack.com/services/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"
+  )
 end
 
 def build_deploy_beta
@@ -38,6 +78,30 @@ def build_deploy_beta
   )
   slack(
     message: "Beta build succesfully released on Google Play Store",
+    success: true,
+    slack_url: "https://hooks.slack.com/services/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"
+  )
+end
+
+def build_deploy_alpha
+  gradle(
+    task: 'assemble',
+    build_type: 'Release',
+    print_command: false, 
+    properties: {     
+        "android.injected.signing.store.file" => "fastlane/android.jks",
+        "android.injected.signing.store.password" => ENV['KEYSTORE_PASSWORD'],     
+        "android.injected.signing.key.alias" => ENV['KEYSTORE_ALIAS'],
+        "android.injected.signing.key.password" => ENV['KEYSTORE_ALIAS_PASSWORD'], 
+    }
+  )
+  apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+  upload_to_play_store(
+    apk: apk_path,
+    track: "alpha"
+  )
+  slack(
+    message: "Alpha build succesfully released on Google Play Store",
     success: true,
     slack_url: "https://hooks.slack.com/services/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"
   )
