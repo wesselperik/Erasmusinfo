@@ -4,12 +4,13 @@ node('master') {
         git 'https://github.com/wesselperik/Erasmusinfo.git'
     }
 
-    stage('Runnin Fastlane') {
-        echo 'Building...'
-        sh 'fastlane beta'
+    stage('Running Fastlane') {
+        echo 'Running Fastlane beta lane...'
+        sh 'bundle exec fastlane beta'
     }
     
     stage('Archiving artifacts') {
+        echo 'Archiving artifacts...'
         archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
     }
 }
