@@ -20,7 +20,16 @@ platform :android do
 end
 
 def build_deploy_beta
-  gradle(task: 'assemble', build_type: 'Release')
+  gradle(
+    task: 'assemble',
+    build_type: 'Release',
+    properties: {     
+        "android.injected.signing.store.file" => "keystore.jks",
+        "android.injected.signing.store.password" => ENV['KEYSTORE_PASSWORD'],     
+        "android.injected.signing.key.alias" => ENV['KEYSTORE_ALIAS'],
+        "android.injected.signing.key.password" => ENV['KEYSTORE_ALIAS_PASSWORD'], 
+    }
+  )
   apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
   upload_to_play_store(
   apk: apk_path,
