@@ -13,6 +13,6 @@ node('master') {
     
     stage('Archiving artifacts') {
         echo 'Archiving artifacts...'
-        archiveArtifacts artifacts: 'mobile/build/outputs/apk/*.apk', fingerprint: true
+        archiveArtifacts artifacts: 'mobile/build/outputs/apk/release/*.apk', fingerprint: true
     }
 }
