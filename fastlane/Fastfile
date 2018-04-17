@@ -85,7 +85,7 @@ end
 
 def build_deploy_alpha
   gradle(
-    task: 'assemble',
+    task: './gradlew assemble',
     build_type: 'Release',
     print_command: false, 
     properties: {     
