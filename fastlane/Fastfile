@@ -21,7 +21,8 @@ end
 
 def build_deploy_beta
   gradle(
-    task: 'assembleRelease -b mobile/build.gradle',
+    task: 'assemble',
+    build_type: 'Release',
     print_command: false, 
     properties: {     
         "android.injected.signing.store.file" => "android.jks",
