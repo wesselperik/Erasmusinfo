@@ -1,8 +1,8 @@
 node('master') {
     stage('Checkout') {
         echo 'Getting source code...'
-        git 'https://github.com/wesselperik/Erasmusinfo.git'
-        git checkout origin/alpha
+        sh "git 'https://github.com/wesselperik/Erasmusinfo.git'"
+        sh "git checkout origin/alpha"
     }
 
     stage('Running Fastlane') {
