@@ -1,7 +1,8 @@
 node('master') {
     stage('Checkout') {
         echo 'Getting source code...'
-        sh "rm -rf $WORKSPACE/*"
+        sh "rm -rf $WORKSPACE"
+        sh "mkdir $WORKSPACE"
         sh "git clone git://github.com/wesselperik/Erasmusinfo.git $WORKSPACE"
         sh "git checkout alpha"
         sh "cd $WORKSPACE"
