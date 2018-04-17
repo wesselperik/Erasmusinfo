@@ -1,7 +1,7 @@
 node('master') {
     stage('Checkout') {
         echo 'Getting source code...'
-        sh "git 'https://github.com/wesselperik/Erasmusinfo.git'"
+        sh "git clone git://github.com/wesselperik/Erasmusinfo.git"
         sh "git checkout origin/alpha"
     }
 
