@@ -21,7 +21,11 @@ end
 
 def build_deploy_beta
   gradle(task: 'assemble', build_type: 'Release')
-  upload_to_play_store(track: 'beta')
+  apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+  upload_to_play_store(
+  apk: apk_path,
+  track: "beta"
+  )
   slack(
     message: "Beta build succesfully released on Google Play Store",
     success: true,
