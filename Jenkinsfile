@@ -7,9 +7,8 @@ node('master') {
     }
 
     stage('Running Fastlane') {
-        when { expression { sh([returnStdout: true, script: 'echo $TAG_NAME | tr -d \'\n\'']) } }
         steps {
-            echo 'Running Fastlane alpha lane...'
+            echo 'Running Fastlane $JOB_NAME lane...'
             sh 'bundle exec fastlane alpha'
         }
     }
