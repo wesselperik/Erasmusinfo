@@ -3,7 +3,7 @@ node('master') {
         echo 'Getting source code...'
         sh "cd $WORKSPACE"
         sh "git checkout " + env.JOB_NAME.replace("Erasmusinfo/", "")
-        sh "git pull origin " + env.JOB_NAME.replace("Erasmusinfo/", "")
+        sh "git pull"
     }
 
     stage('Running Fastlane') {
