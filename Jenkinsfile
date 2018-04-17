@@ -7,10 +7,8 @@ node('master') {
     }
 
     stage('Running Fastlane') {
-        steps {
-            echo 'Running Fastlane $JOB_NAME lane...'
-            sh 'bundle exec fastlane alpha'
-        }
+        echo 'Running Fastlane $JOB_NAME lane...'
+        sh 'bundle exec fastlane alpha'
     }
     
     stage('Archiving artifacts') {
