@@ -23,8 +23,9 @@ def build_deploy_beta
   gradle(
     task: 'assemble',
     build_type: 'Release',
+    print_command: false, 
     properties: {     
-        "android.injected.signing.store.file" => "keystore.jks",
+        "android.injected.signing.store.file" => "android.jks",
         "android.injected.signing.store.password" => ENV['KEYSTORE_PASSWORD'],     
         "android.injected.signing.key.alias" => ENV['KEYSTORE_ALIAS'],
         "android.injected.signing.key.password" => ENV['KEYSTORE_ALIAS_PASSWORD'], 
