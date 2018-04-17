@@ -7,7 +7,7 @@ node('master') {
     }
 
     stage('Running Fastlane') {
-        echo 'Running Fastlane $JOB_NAME lane...'
+        echo 'Running Fastlane ' + env.JOB_NAME + ' lane...'
         sh 'bundle exec fastlane alpha'
     }
     
