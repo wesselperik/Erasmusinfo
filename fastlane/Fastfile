@@ -21,7 +21,7 @@ end
 
 def build_deploy_beta
   gradle(
-    task: 'assemble -p mobile',
+    task: 'assemble -b mobile/build.gradle',
     build_type: 'Release',
     print_command: false, 
     properties: {     
