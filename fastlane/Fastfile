@@ -9,7 +9,7 @@ platform :android do
   end
 
   desc "Deploy a new production build to the Google Play Store"
-  lane :beta do
+  lane :production do
     begin
       build_deploy_production()
     rescue => exception
@@ -27,7 +27,7 @@ platform :android do
   end
 
   desc "Deploy a new alpha build to the Google Play Store"
-  lane :beta do
+  lane :alpha do
     begin
       build_deploy_alpha()
     rescue => exception

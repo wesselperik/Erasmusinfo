@@ -5,8 +5,8 @@ node('master') {
     }
 
     stage('Running Fastlane') {
-        echo 'Running Fastlane production lane...'
-        sh 'fastlane production'
+        echo 'Running Fastlane beta lane...'
+        sh 'bundle exec fastlane beta'
     }
     
     stage('Archiving artifacts') {
