@@ -1,16 +1,18 @@
 node('master') {
     stage('Checkout') {
         echo 'Getting source code...'
-        git 'https://github.com/wesselperik/Erasmusinfo.git'
+        sh "cd $WORKSPACE"
+        sh "git checkout " + env.JOB_NAME.replace("Erasmusinfo/", "")
+        sh "git pull"
     }
 
     stage('Running Fastlane') {
-        echo 'Running Fastlane beta lane...'
-        sh 'bundle exec fastlane beta'
+        echo 'Running Fastlane ' + env.JOB_NAME.replace("Erasmusinfo/", "") + ' lane...'
+        sh 'bundle exec fastlane ' + env.JOB_NAME.replace("Erasmusinfo/", "")
     }
     
     stage('Archiving artifacts') {
         echo 'Archiving artifacts...'
-        archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
+        archiveArtifacts artifacts: 'mobile/build/outputs/apk/release/*.apk', fingerprint: true
     }
 }

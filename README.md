@@ -2,11 +2,11 @@
 
 Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](https://www.het-erasmus.nl/) met de Erasmusinfo app!
 
-:warning:	**Build status:** [![Build Status](http://jenkins.perik.me/job/Erasmusinfo/badge/icon)](http://jenkins.perik.me/job/Erasmusinfo/)
+:warning:	**Build status:** [![Build Status](http://jenkins.perik.me/job/Erasmusinfo/job/master/badge/icon)](http://jenkins.perik.me/blue/organizations/jenkins/Erasmusinfo/activity)
 
-:white_check_mark: **Huidige versie:** 4.0.1 (build 32)
+:white_check_mark: **Huidige versie:** 4.0.3 (build 37)
 
-:clock8: **Bijgewerkt op:** 21 december 2017
+:clock8: **Bijgewerkt op:** 17 april 2018
 
 :earth_africa: **Website:** [erasmusinfo.nl](https://erasmusinfo.nl/)
 
@@ -14,7 +14,7 @@ Bekijk gemakkelijk roosterwijzigingen, mededelingen en nieuws van [Het Erasmus](
 
 ## Download
 
-Download de app via [Google Play](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo) of download [de laatste debug-APK](http://jenkins.perik.me/job/Erasmusinfo/6/artifact/mobile/build/outputs/apk/debug/mobile-debug.apk).
+Download de app via [Google Play](https://play.google.com/store/apps/details?id=com.wesselperik.erasmusinfo) of download [de laatste APK](http://jenkins.perik.me/job/Erasmusinfo/job/master/lastSuccessfulBuild/artifact/mobile/build/outputs/apk/release/mobile-release.apk).
 
 ## License
 

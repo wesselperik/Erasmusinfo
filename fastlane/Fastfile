@@ -50,7 +50,8 @@ def build_deploy_production
   )
   apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
   upload_to_play_store(
-    apk: apk_path
+    apk: apk_path,
+    check_superseded_tracks: true
   )
   slack(
     message: "Production build succesfully released on Google Play Store",
@@ -74,7 +75,8 @@ def build_deploy_beta
   apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
   upload_to_play_store(
     apk: apk_path,
-    track: "beta"
+    track: "beta",
+    check_superseded_tracks: true
   )
   slack(
     message: "Beta build succesfully released on Google Play Store",
@@ -98,7 +100,8 @@ def build_deploy_alpha
   apk_path = Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
   upload_to_play_store(
     apk: apk_path,
-    track: "alpha"
+    track: "alpha",
+    check_superseded_tracks: true
   )
   slack(
     message: "Alpha build succesfully released on Google Play Store",

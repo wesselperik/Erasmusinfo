@@ -87,15 +87,6 @@
                 android:value="com.wesselperik.erasmusinfo.activities.MainActivity" />
         </activity>
 
-        <receiver android:name=".classes.Autostart" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".services.WearService" />
-
         <service android:name=".services.FCMInitializationService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
